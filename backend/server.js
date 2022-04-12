@@ -1,7 +1,9 @@
-const http          = require('http');
-const app           = require('./app');
+const http = require('http');
+const app = require('./app');
+const { Sequelize } = require('sequelize');
+
 const normalizePort = val => {
-const port          = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     return val;
@@ -11,7 +13,7 @@ const port          = parseInt(val, 10);
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const errorHandler = error => {
@@ -33,6 +35,7 @@ const errorHandler = error => {
       throw error;
   }
 };
+
 
 const server = http.createServer(app);
 
