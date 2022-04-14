@@ -1,14 +1,48 @@
+//Imports
 const jwt = require('jsonwebtoken');
 
-require('dotenv').config();
+const JWT_SIGN_SECRET = 'FlpC24SAx21neR';
 
-module.exports = (req,res,next) =>{
-    try{
-        const token = req.headers.authorization.split(" ")[1];
-        req.bearerToken = jwt.verify(token, process.env.TOKEN);
-        next();
+//Exported functions
+module.exports = {
+   generateTokenForUser: function(userData) {
+       return jwt.sign({
+           userId: userData.id,
+           isAdmin: userData.isAdmin,
+           
+       },
+       JWT_SIGN_SECRET,
+       { expiresIn: '24h' }
+       )
+     },
+     parseAuthorization: function(authorization) {
+        const token = (authorization != null) ? authorization.replace('Bearer','') : null;
+        return (token != null) ? token.trim() : null; //sup espace devant et derriere.no
+     },
+     getUserId: function(authorization) {
+         var userId = -1;
+         const token = module.exports.parseAuthorization(authorization);
+         if(token != null){
+         try {
+             const jwtToken = jwt.verify(token, JWT_SIGN_SECRET);
+             if(jwtToken != null)
+             userId = jwtToken.userId;
+         } catch(err) { }
+     }
+     return userId;
+    },
 
-    } catch (error){
-        res.status(401).json({error: "Requête non authentifiée !"});
-    }
+    getAdmin: function(authorization) {
+        let isAdmin = -1;
+        let token = module.exports.parseAuthorization(authorization);
+        if(token != null) {
+            try {
+                let jwtToken = jwt.verify(token, JWT_SIGN_SECRET);
+                if(jwtToken != null)
+                isAdmin = jwtToken.isAdmin;
+            } catch(err) { }
+        }
+        return isAdmin;
+    },
+
 };
