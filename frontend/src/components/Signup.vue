@@ -1,24 +1,26 @@
 <template>
-    <div>
-        <h1>Ne perds pas de temps et viens nous rejoindres ! </h1>
+    <div class="container d-flex justify-content-center align-items-center flex-column">
+            <img class="w-50" src="../assets/icon-left-font.svg" alt="Groupomania">
+        <h1 class="text-center">Ne perds pas de temps et viens nous rejoindres ! </h1>
         <form>
-        <div class="form-group col-lg-3 col-sm-6">
-          <input v-model='name' type='name' placeholder="name" size="50" required >
+        <div class="form-group ">
+          <input class="form-control" v-model='name' type='name' placeholder="Nom d'utilisateur" size="50" required >
         </div>
-        <div class="form-group col-lg-3 col-sm-6">
-          <input v-model='email' type='email' placeholder="email" size="50" required aria-label="Email de connection">
+        <div class="form-group ">
+          <input class="form-control" v-model='email' type='email' placeholder="Email" size="50" required aria-label="Email de connection">
         </div>
-        <div class="form-group col-lg-3 col-sm-6">
-          <input v-model='password' type='password' placeholder="password" size="50" required>
+        <div class="form-group ">
+          <input class="form-control" v-model='password' type='password' placeholder="Mot de passe" size="50" required>
         </div>
       </form>  
       <router-link to="/">
-        <button @click="signup()" type="submit" class="btn btn-secondary" aria-label="S'inscrire" formaction="" formenctype="application/x-www-form-urlencoded">S'inscrire</button>
+        <button @click="signup()" type="submit" class="btn btn-secondary mt-2" id="login" aria-label="S'inscrire" formaction="" formenctype="application/x-www-form-urlencoded">S'inscrire</button>
       </router-link>
     </div>
 </template>
 
 <script>
+import '../assets/btn.scss'
 export default {
   name: 'signup',
   

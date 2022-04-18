@@ -1,10 +1,15 @@
 <template>
-    <div class="container d-flex justify-content-center flex-column">
-        <img class="w-50 mt-5 text-center" src="../assets/icon-left-font-monochrome-black.svg" alt="Groupomania">
-        <h2 class="text-center mt-4">Bienvenue sur votre réseau social d'entreprise préférée.</h2>
+    <div class="container">
+        <div class="container d-flex justify-content-center">
+        <img class="w-50 img-fluid" src="../assets/icon-above-font.svg" alt="Groupomania">
+        </div>
+        <h2 class="text-center mt-n5 ">Bienvenue sur le réseau social de votre entreprise préférée.</h2>
+        
     </div>
 </template>
+ 
 <script>
+
 export default {
   name: 'groupomania',
   props: {

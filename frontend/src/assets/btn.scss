@@ -12,9 +12,7 @@
     height: 50px;
     transition: all 250ms ease-in;
     &:hover{
-        
         transform: scale(1.055);
-        color: black;
         border-radius:0;
     }
 }
