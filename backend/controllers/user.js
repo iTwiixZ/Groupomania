@@ -34,7 +34,7 @@ module.exports = {
           return res.status(400).json({ 'error': ' Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit.'})
         }
 
-        models.User.findOne({
+        models.Users.findOne({
             attributes: ['email'],
             where: { email: email }
         })
@@ -42,7 +42,7 @@ module.exports = {
           if(!userFound) {
             
             bcrypt.hash(password, 10, function( err, bcryptedPassword ) {
-              const newUser = models.User.create({
+              const newUser = models.Users.create({
                   name: name,
                   email: email,
                   password: bcryptedPassword,

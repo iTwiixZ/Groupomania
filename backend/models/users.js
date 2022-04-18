@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     clasMethods: {
       associate: function(models){
         models.Users.hasMany(models.Post);
-      models.Users.hasMany(models.Comment);
+        models.Users.hasMany(models.Comment);
     },
 
   } 
