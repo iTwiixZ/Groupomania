@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt'); //création d'un mot de passe hashé.
 
-const User = require('../models/users');
+const User = require('../models/user');
 
 const jwt = require('jsonwebtoken'); // création et vérification des tokens d'authentification.
 

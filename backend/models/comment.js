@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   },{
     clasMethods: {
       associate: function(models){
-        models.Comment.belongsTo(models.Users, {
+        models.Comment.belongsTo(models.User, {
           foreignKey: 'userId'
         })
         models.Comment.belongsTo(models.Post, {

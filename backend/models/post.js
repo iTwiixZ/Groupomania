@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       associate: function(models){
         models.Post.hasMany(models.Comment);
         models.Post.hasMany(models.Likes);
-        models.Post.belongsTo(models.Users, {
+        models.Post.belongsTo(models.User, {
           foreignKey: 'userId'
         })
         

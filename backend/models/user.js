@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define('Users',{
+  const User = sequelize.define('User',{
     name:{
       type: DataTypes.STRING,
       allowNull: false
@@ -22,12 +22,12 @@ module.exports = (sequelize, DataTypes) => {
   },{
     clasMethods: {
       associate: function(models){
-        models.Users.hasMany(models.Post);
-        models.Users.hasMany(models.Comment);
+        models.User.hasMany(models.Post);
+      models.User.hasMany(models.Comment);
     },
 
   } 
  })
   
-  return Users;
+  return User;
 };
