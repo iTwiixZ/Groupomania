@@ -1,0 +1,262 @@
+<template>
+<div>
+    <header class="container">
+        <div class="container">
+            <!-- Bouton de déconnection -->
+             <button v-on:click.prevent='logout()' type="button" id="logout_btn" > Déconnection</button>
+             <!-- Suppression du compte  -->
+            <button v-on:click.prevent='deleteCount(userId)' type="button" id='delete_btn' >Supprimer le compte</button>
+            <div class="container d-flex justify-content-center align-items-center flex-column">
+            <img class="w-50" src="../assets/icon-above-font.svg" alt="Logo">
+            <h1 class="text-center">Bienvenue sur votre réseau {{name}} ! </h1>
+                <p class=" h3 text-muted">Créer votre post, voir votre mur et +.</p>
+                <span id="fleche"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Création d'un post -->
+    <div class="container" id="post_form">
+        <form method="POST" enctype="multipart/form-data" id="form">
+        <div class="form-group">
+            <input id="input_size" class="form-control mb-1" v-model="title" type="title" placeholder="Le titre de votre post " size="50"  required aria-label="Titre du post ">
+        </div>
+        <div class="form-group">
+            <input id="input_size" v-model='content' size="50" type="text" placeholder="Que se passe t-il ?" class="form-control mb-1">
+        </div>
+        <div>
+        <div v-if="media">
+            <img :src="media" alt="Image du post" id="img_post" class="file">
+        </div>
+        <div class="form-group">
+            <input type="file" accept=".jpeg, .jpg, .png, .gif, .webp" v-on:change="uploadFile" id="file"  class="input-file">
+        </div>
+        </div>
+        <button v-on:click='newPost()' type="button" id="btn_post">Envoyer</button>
+        </form>
+    </div>
+
+<!-- Affichage de tous les post + les images -->
+    <div></div>
+
+
+
+
+    </div>
+</template>
+
+
+<script>
+import axios from 'axios'
+import '../assets/btn.scss'
+import '../assets/fleche.scss'
+import '../assets/mur.scss'
+export default {
+  name:'mur',
+  img:'',
+  data() {
+    return {
+      data:JSON.parse(this.$localStorage.get('user')),
+      userId: JSON.parse(this.$localStorage.get('userId')),
+      isAdmin:JSON.parse(this.$localStorage.get('isAdmin')),
+      name:'',
+      posts:[],
+           title:'',
+           content:'',
+           dateAdd:'',
+           id:'',
+           media:'',
+      post:'',
+      comments:[]
+      
+      
+    }
+      
+  },
+  mounted() {
+    if (localStorage.name) {
+      this.name = localStorage.name;
+    }
+    // posts
+    axios.get('http://localhost:3000/api/posts/getAll') 
+      .then(res => { 
+        console.log(res.data)
+        this.posts = res.data
+        })
+      .catch(error => console.log(error));
+    
+  },
+  created() {
+     
+  },
+  watch: {
+    username(newName) {
+      localStorage.name = newName;
+      }
+    
+  },
+  methods: {
+    // déconnexion
+    logout: function () {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('name');
+      localStorage.removeItem('isAdmin');
+      this.$router.push('/');
+      },
+    // supprimer un compte utilisateur
+    deleteCount: function (userId) {
+      axios.delete(`http://localhost:3000/api/users/${userId}`,
+      {
+          headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + this.token
+          }
+        })
+        .then(() =>{
+          localStorage.clear();
+          this.$router.push('/');
+          alert('Votre compte a été supprimé !')
+        })
+        .catch(error => console.log(error))
+    },
+    // supprimer un post
+    deletePost: function (id) {
+          let token =localStorage.getItem('token');
+          axios.delete(`http://localhost:3000/api/posts/${id}`,
+          {
+          headers: {
+            'content-type': 'application/json',
+            "Accept": "application/json",
+            'Authorization': 'Bearer ' + token
+          }
+        } )
+          .then(response => {
+              console.log(response.data)
+              alert('Votre message a été supprimé !')
+              location.reload(true);
+            })
+            .catch(error => console.log(error));
+    },
+    // supprimer un commentaire
+    deleteComment: function (id) {
+          let token =localStorage.getItem('token');
+          axios.delete(`http://localhost:3000/api/comments/delete/${id}`,
+          {
+          headers: {
+            'content-type': 'application/json',
+            "Accept": "application/json",
+            'Authorization': 'Bearer ' + token
+          }
+        } )
+          .then(response => {
+              console.log(response.data)
+              alert('Votre commentaire a été supprimé !')
+              location.reload(true);
+            })
+            .catch(error => console.log(error));
+    },
+    // les commentaires
+    showComment: function(postId) {
+      let show_comment = document.getElementById('show_comment');
+      if(getComputedStyle(show_comment).display != "block"){
+        show_comment.style.display = "none"
+        } else {
+            show_comment.style.display = "block"
+          }
+      
+      axios.get(`http://localhost:3000/api/comments/getComments/${postId}`)
+            .then(response => {
+              console.log(response.data)
+              this.comments =response.data
+            })
+            .catch(error => console.log(error));
+      
+      
+      },
+    // creation nouveau post
+    newPost: function () {
+        let token =localStorage.getItem('token');
+        const post = {
+          title: this.title,
+          content: this.content,
+          // nom fichier url
+          media: this.img,
+          // media: this.media,
+          userId: this.userId,
+        }
+        var formData = new FormData()
+        formData.append('media', this.img)
+        // formData.append('media', this.media);
+        formData.append('post', JSON.stringify(post));
+        axios.post('http://localhost:3000/api/posts/new',
+        formData ,{
+                  headers: {
+                    
+                  'Authorization': 'Bearer ' + token
+                  }
+         }
+        ).then(() => { 
+                  console.log('post envoyé !')
+                  console.log( post )
+                  this.post ==="";
+                  alert('Votre message a bien été envoyé !')
+                  location.reload(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    console.log("Votre message n'a pas pu etre posté !");
+                });
+    },
+    newComment: function(postId) {
+        let token =localStorage.getItem('token');
+        console.log(postId)
+        const comment = {
+          content : this.content,
+          userId : this.userId,
+          media : this.img,
+        }
+        var formData = new FormData()
+        formData.append('media', this.img)
+        // formData.append('media', this.media);
+        formData.append('comment', JSON.stringify(comment));
+        axios.post(`http://localhost:3000/api/comments/new/${postId}`, formData,
+        {
+          headers: {
+            
+            "Authorization": 'Bearer ' + token
+          }
+        })
+        .then(() => {
+          console.log('commentaire envoyé' + comment );
+          alert('Votre commentaire a bien été envoyé !')
+          location.reload(true);
+        })
+        .catch((error) => {
+                    console.log(error);
+                    console.log("Votre message n'a pas pu etre posté !");
+                });
+    },
+    uploadFile(e) {
+      // this.img = e.target.files[0];
+       this.img = e.target.files[0];
+       const file = e.target.files[0];
+       if (file) {
+            let reader = new FileReader();
+            reader.addEventListener('load', function(){
+                let preview = document.getElementById('file');
+                preview.setAttribute("src",this.result);
+            })
+            reader.onload = (event) => {
+                this.preview = event.target.result
+                this.media = event.target.result
+            }
+            reader.readAsDataURL(file)
+                     
+                  
+         }
+      },
+    
+  }
+}
+</script>

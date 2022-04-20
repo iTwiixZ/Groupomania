@@ -1,0 +1,33 @@
+#post_form{
+    box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
+    height: 480px;
+    border-radius: 5px;
+}
+
+#img_post{
+    width: 20%;
+    
+}
+
+#btn_post{
+    cursor: pointer;
+    border: 0;
+    font-family: monospace;
+    border-radius:15px ;
+    color: white;
+    transition: all 350ms ease-in-out;
+    height: 45px;
+    width: 180px;
+    margin-right: 25px;
+    margin-top: 15px;
+    background-color: #F44141;
+    &:hover{
+        transform: scale(1.050);
+        box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
+        &::after{
+            content:' 📮 ';
+        }
+    }
+}
+
+

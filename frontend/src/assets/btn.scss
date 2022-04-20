@@ -1,5 +1,5 @@
 #login{
-    font-family: Hack, monospace;
+    font-family: monospace;
     background: #F44141;
     color: white;
     cursor: pointer;
@@ -21,5 +21,46 @@ a{
     color: inherit;
     &:hover{
         color: inherit;
+    }
+}
+
+#logout_btn{
+    cursor: pointer;
+    border: 0;
+    font-family: monospace;
+    border-radius:15px ;
+    color: white;
+    transition: all 350ms ease-in-out;
+    height: 45px;
+    width: auto;
+    margin-right: 25px;
+    margin-top: 15px;
+    background-color: #F44141;
+
+    &:hover{
+        transform: scale(1.080);
+       box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
+       &::after{
+           content: ' 😴 ';
+       }
+    }
+}
+
+#delete_btn{
+    cursor: pointer;
+    transition: all 450ms ease-in-out;
+    height: 45px;
+    width: auto;
+    border: 0;
+    border-radius: 15px;
+    color: white;
+    font-family: monospace;
+    background-color: #F44141;
+    &:hover{
+        transform: scale(1.105);
+        box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
+        &::after{
+            content: ' 😢 ';
+        }
     }
 }
