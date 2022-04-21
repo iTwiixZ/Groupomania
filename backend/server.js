@@ -57,8 +57,7 @@ try {
     console.error('Impossible de se connecter, erreur suivante :', error);
   }
 
-  models.sequelize.sync({ force: true })
-  .then(() => {
+  models.sequelize.sync().then(() => {
     console.log(`Database & tables created!`);
   });
  
