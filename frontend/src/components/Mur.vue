@@ -29,7 +29,7 @@
             <img :src="media" alt="Image du post" id="img_post" class="file">
         </div>
         <div class="form-group">
-            <input type="file" accept=".jpeg, .jpg, .png, .gif, .webp" v-on:change="uploadFile" id="file"  class="input-file">
+            <input type="file" accept=".jpeg, .jpg, .png, .gif, .webp" v-on:change="uploadFile" id="file" class="input-file">
         </div>
         </div>
         <button v-on:click='newPost()' type="button" id="btn_post">Envoyer</button>
@@ -216,7 +216,7 @@ export default {
           userId: this.userId,
         }
         var formData = new FormData()
-        formData.append('media', this.img)
+        formData.append('media', this.img);
         // formData.append('media', this.media);
         formData.append('post', JSON.stringify(post));
         axios.post('http://localhost:3000/api/posts/new',

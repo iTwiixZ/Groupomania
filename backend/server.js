@@ -14,6 +14,7 @@ const normalizePort = val => {
   }
   return false;
 };
+
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -60,5 +61,5 @@ try {
   .then(() => {
     console.log(`Database & tables created!`);
   });
-
+ 
 server.listen(port);
