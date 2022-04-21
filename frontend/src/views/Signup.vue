@@ -2,6 +2,7 @@
   <div>
       
       <signup/>
+      
   </div>    
 
 </template>

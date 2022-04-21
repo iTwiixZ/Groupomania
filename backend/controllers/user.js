@@ -34,7 +34,7 @@ module.exports = {
           return res.status(400).json({ 'error': ' Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit.'})
         }
 
-        models.User.findOne({
+        models.Users.findOne({
             attributes: ['email'],
             where: { email: email }
         })
@@ -42,7 +42,7 @@ module.exports = {
           if(!userFound) {
             
             bcrypt.hash(password, 10, function( err, bcryptedPassword ) {
-              const newUser = models.User.create({
+              const newUser = models.Users.create({
                   name: name,
                   email: email,
                   password: bcryptedPassword,
@@ -76,7 +76,7 @@ module.exports = {
         return res.status(400).json({ 'error': 'missing parameters'});
       }
 
-      models.User.findOne({
+      models.Users.findOne({
         where: { email: email }
       })
       .then(function(userFound) {
@@ -103,8 +103,8 @@ module.exports = {
     },
 
     // voir un profil.
-    getUserProfile: function(req, res) {
-      models.User.findOne({
+    getUser: function(req, res) {
+      models.Users.findOne({
         attributes: ["name","email"],
         where: { id: req.body.id},
       })
@@ -126,7 +126,7 @@ module.exports = {
       const headerAuth = req.headers['authorization'];
       const userId = jwtUtils.getUserId(headerAuth);
 
-        models.User.findOne({
+        models.Users.findOne({
             where: {id: req.params.userId},
         })
       
@@ -139,35 +139,7 @@ module.exports = {
         .catch((error) => {res.status(400).json({ error: error, message: "Une erreur est survenue" })});
       
     },
-    //     const headerAuth = req.headers['authorization'];
-    //     const userId = jwtUtils.getUserId(headerAuth);
     
-    //     try{
-    //         const user = models.User.findOne({ where: {id: req.body.userId}})
-    
-    //         if (userId === user.id || isAdmin === true){
-    //             if (user.profilePhoto !== null){
-    //                 const filename = user.profilePhoto.split('/images/')[1];
-    //                 fs.unlink(`images/${filename}`, () => {
-    //                     user.destroy({
-    //                         where: {id: req.body.userId}
-    //                     })
-    //                     return res.json({ message: 'Profile removed'})
-    //                 })
-    //             } else {
-    //                 user.destroy({
-    //                     where: {id: req.body.userId}
-    //                 })
-    //                 return res.json({ message: 'Profile removed'})
-    //             }
-    //         }else {
-    //             res.status(404).json({ 'error': 'Unable to verify user' });
-    //         }
-    //     }catch (err) {
-    //         return res.status(500).json({err})
-    //     }
-    // },
-
     //Déconnexion.
     logout: function (req, res) {
       res.cookie('jwt', '', { maxAge: 1 });

@@ -36,7 +36,7 @@ module.exports = {
             return res.status(400).json({'error': 'invalid parameters'});
         }
         
-        models.Post.create({
+        models.post.create({
             title: title,
             content: content,
             media : mediaPost,
@@ -62,7 +62,7 @@ module.exports = {
 // Obtenir un post.
     getOnePost: function (req, res) {
         
-        models.Post.findOne({
+        models.post.findOne({
             where: { id: req.body.id },
             order: [['id', 'DESC']], 
         }).then(result => {
@@ -75,7 +75,7 @@ module.exports = {
     },
     
     getAllPost: function (req, res) {
-        models.Post.findAll({
+        models.post.findAll({
             attributes: ["title",'content', 'media', 'userId', 'id', 'createdAt'],
            order:[[
                 'id', 'DESC'
@@ -90,7 +90,7 @@ module.exports = {
 
     deletePost: function(req, res) {
         
-        models.Post.findOne({
+        models.post.findOne({
             where: {id: req.params.id},
         })
         .then( (post) => {
@@ -108,7 +108,7 @@ module.exports = {
         const userId = jwtUtils.getUserId(headerAuth);
         const id = req.body.id;
 
-        models.Post.findOne({ where: { id: req.params.id }})
+        models.post.findOne({ where: { id: req.params.id }})
         .then(post => {
             if(userId === post.userId){
                 const updatePost = {
@@ -121,7 +121,7 @@ module.exports = {
                      fs.unlinkSync(`images/${filename}`)
                      console.log(post.image);
                  }
-                models.Post.update(updatePost, {where: { id: req.params.id }})
+                models.post.update(updatePost, {where: { id: req.params.id }})
                 .then(()=>res.status(200).json({ message: 'Post modifié !'}))
                 .catch(error => res.status(400).json({ error}))
             } else {

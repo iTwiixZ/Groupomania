@@ -36,13 +36,43 @@
         </form>
     </div>
 
-<!-- Affichage de tous les post + les images -->
-    <div></div>
-
-
-
-
+<div class='container' id='post'>
+      <h2>Voici les dernières acutalités de votre communauté</h2>
+      <!-- les posts -->
+      <div class="container">
+        <div id="postdiv" class="post" v-for="post in posts" :key="post.id">
+          <h3 class="pt-3 mb-0">{{ post.title }}</h3>
+          <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ post.userId }}</span></small>
+          <p class="pt-3 mb-1">{{ post.content }}</p>
+          <p>{{post.id}}</p>
+          <div class="form-group">
+            <img :src=" 'http://localhost:3000/images/' + post.media " alt= "image du post " />
+          </div>
+          <!--  supprimer le post -->
+          <button v-on:click.prevent='deletePost(post.id)' v-if="post.userId == userId || isAdmin == true" class="btn btn-danger"> Supprimer </button>
+          <!--  commentaires -->
+          <button @click ="showComment(post.id)" type="button" class="btn btn-warning"> Voir les commentaires </button>
+          <div v-show ='showComment' id='show_comment' >
+            <div id="commentdiv" class="comment" v-for="comment in comments" :key="comment.id" >
+              <div v-if="comment.postId == post.id">
+              <p class="content">{{comment.content}}</p>
+              <small class="date">{{comment.createdAt}}</small>
+              <!-- bouton supprimer le commentaire -->
+              <button v-on:click.prevent='deleteComment(comment.id)' v-if="comment.userId == userId || isAdmin == true" class="btn btn-danger btn-sm"> Supprimer </button>
+              </div>
+            </div>
+            <div id="noComment"></div>
+          </div>
+          <!-- répondre au post -->
+          <form>
+            <input class="form-control" v-model='content' type="text" id="content" name="content" placeholder="Ecris ton commentaire !" >
+            <button v-on:click='newComment(post.id)' type="button" id="btn_comment" class="btnLogin btn-primary btn-sm"> Envoyer ma réponse !</button>
+          </form>
+        </div>
+      </div>
+      <!-- fin des posts -->
     </div>
+</div>
 </template>
 
 

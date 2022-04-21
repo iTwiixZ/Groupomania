@@ -1,6 +1,7 @@
 const http = require('http');
 const app = require('./app');
-const { Sequelize } = require('sequelize');
+// const { Sequelize } = require('sequelize');
+const models = require('./models'); //ici j'utilise la configuration qui a été faite dans le fichier index.js présent dans model, je n'est pas besoin de sequelize à ce niveau c'est pourquoi j'ai commenté la ligne au dessus
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -13,7 +14,7 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const errorHandler = error => {
@@ -46,16 +47,18 @@ server.on('listening', () => {
   console.log('Ouvert sur le ' + bind);
 });
 
-// Connexion a la base de donnée MySQL avec SEquelize
-const sequelize = new Sequelize("database_dev", "root", "root", {
-    dialect: "mysql",
-    host: "localhost"
-});
+
 
 try {
-    sequelize.authenticate();
+  models.sequelize.authenticate();
     console.log('Connecté à la base de données MySQL!');
   } catch (error) {
     console.error('Impossible de se connecter, erreur suivante :', error);
   }
+
+  models.sequelize.sync({ force: true })
+  .then(() => {
+    console.log(`Database & tables created!`);
+  });
+
 server.listen(port);

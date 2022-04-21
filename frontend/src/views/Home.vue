@@ -1,21 +1,27 @@
 <template>
     <div>
-        <Mur/>
-        <!-- <groupomania/>
-        <login/> -->
+    
+        <groupomania/>
+        <login/>
     </div>
+        
+        
 </template>
 
 <script>
-import Mur from '../components/Mur.vue'
-// import groupomania from '@/components/Groupomania.vue'
-// import Login from '../components/Login.vue'
-//  import mur from '../components/Mur.vue'
+
+import groupomania from '@/components/Groupomania.vue'
+import Login from '../components/Login.vue'
+
+
 export default{
     name:'Home',
     components:{
-        // Login,
-        Mur
+        groupomania,
+        Login,
+        
+        
+        
     }
 }
 </script>
