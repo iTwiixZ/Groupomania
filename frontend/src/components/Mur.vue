@@ -9,7 +9,7 @@
             <div class="container d-flex justify-content-center align-items-center flex-column">
             <img class="w-50" src="../assets/icon-above-font.svg" alt="Logo">
             <h1 class="text-center">Bienvenue sur votre réseau {{name}} ! </h1>
-                <p class=" h3 text-muted">Créer votre post, voir votre mur et +.</p>
+                <p class=" h3 text-muted">Créer votre post, voir les publications et +.</p>
                 <span id="fleche"></span>
             </div>
         </div>
@@ -36,29 +36,29 @@
         </form>
     </div>
 
-<div class='container' id='post'>
-      <h2>Voici les dernières acutalités de votre communauté</h2>
+<div class='container mt-3' id='post'>
+      <h2 class="text-center">Voici les dernières acutalités de votre communauté</h2>
       <!-- les posts -->
-      <div class="container">
-        <div id="postdiv" class="post" v-for="post in posts" :key="post.id">
+      <div class="row">
+        <div id="post-div" class="col-md-6 mb-2 post_div" v-for="post in posts" :key="post.id">
           <h3 class="pt-3 mb-0">{{ post.title }}</h3>
           <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ post.userId }}</span></small>
           <p class="pt-3 mb-1">{{ post.content }}</p>
           <p>{{post.id}}</p>
           <div class="form-group">
-            <img :src=" 'http://localhost:3000/images/' + post.media " alt= "image du post " />
+            <img :src=" 'http://localhost:3000/images/' + post.media " class="img_posted" alt= "image du post " />
           </div>
           <!--  supprimer le post -->
-          <button v-on:click.prevent='deletePost(post.id)' v-if="post.userId == userId || isAdmin == true" class="btn btn-danger"> Supprimer </button>
+          <button v-on:click.prevent='deletePost(post.id)' v-if="post.userId == userId || isAdmin == true" class="btn_delete_post"> Supprimer </button>
           <!--  commentaires -->
-          <button @click ="showComment(post.id)" type="button" class="btn btn-warning"> Voir les commentaires </button>
+          <button @click ="showComment(post.id)" type="button" class="btn_show"> Voir les commentaires </button>
           <div v-show ='showComment' id='show_comment' >
             <div id="commentdiv" class="comment" v-for="comment in comments" :key="comment.id" >
               <div v-if="comment.postId == post.id">
               <p class="content">{{comment.content}}</p>
               <small class="date">{{comment.createdAt}}</small>
               <!-- bouton supprimer le commentaire -->
-              <button v-on:click.prevent='deleteComment(comment.id)' v-if="comment.userId == userId || isAdmin == true" class="btn btn-danger btn-sm"> Supprimer </button>
+              <button v-on:click.prevent='deleteComment(comment.id)' v-if="comment.userId == userId || isAdmin == true" class=""> Supprimer le commentaire </button>
               </div>
             </div>
             <div id="noComment"></div>
@@ -66,7 +66,7 @@
           <!-- répondre au post -->
           <form>
             <input class="form-control" v-model='content' type="text" id="content" name="content" placeholder="Ecris ton commentaire !" >
-            <button v-on:click='newComment(post.id)' type="button" id="btn_comment" class="btnLogin btn-primary btn-sm"> Envoyer ma réponse !</button>
+            <button v-on:click='newComment(post.id)' type="button" id="btn_post_comment" class="mb-1"> Envoyer ma réponse !</button>
           </form>
         </div>
       </div>
@@ -253,7 +253,8 @@ export default {
         axios.post(`http://localhost:3000/api/comments/new/${postId}`, formData,
         {
           headers: {
-            
+             'content-type': 'application/json',
+              "Accept": "application/json",
             "Authorization": 'Bearer ' + token
           }
         })

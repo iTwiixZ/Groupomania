@@ -1,11 +1,14 @@
 #post_form{
     box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
-    height: 480px;
+    height: 380px;
     border-radius: 5px;
 }
 
+
+
 #img_post{
-    width: 20%;
+    width: 10%;
+    height: 20%;
     
 }
 
@@ -16,8 +19,8 @@
     border-radius:15px ;
     color: white;
     transition: all 350ms ease-in-out;
-    height: 45px;
-    width: 180px;
+    height: 48px;
+    width: 199px;
     margin-right: 25px;
     margin-top: 15px;
     background-color: #F44141;
@@ -30,4 +33,53 @@
     }
 }
 
+#post{
+   
+    box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
+}
+// .post_div{
+   
+// }
+.img_posted{
+    width: 30%;
+    height: 20%;
+}
+.btn_show{
+    cursor: pointer;
+    border: 0;
+    border-radius:15px ;
+    color: white;
+    transition: all 350ms ease-in;
+    height: 48px;
+    width: 185px;
+    margin-right: 25px;
+    background-color: #F44141;
+  
+}  
+    
+
+.btn_delete_post{
+    cursor: pointer;
+    border: 0;
+    border-radius:15px ;
+    color: white;
+    transition: all 350ms ease-in;
+    height: 48px;
+    width: 185px;
+    margin-right: 25px;
+    background-color: #F44141;
+ }
+
+ #btn_post_comment{
+    cursor: pointer;
+    border: 0;
+    border-radius:15px ;
+    color: white;
+    transition: all 350ms ease-in;
+    height: 48px;
+    width: 185px;
+    background-color: #F44141;
+ }
+       
+    
 
