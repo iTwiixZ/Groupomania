@@ -40,7 +40,7 @@
       <h2 class="text-center">Voici les dernières acutalités de votre communauté</h2>
       <!-- les posts -->
       <div class="row">
-        <div id="post-div" class="col-md-6 mb-2 post_div" v-for="post in posts" :key="post.id">
+        <div id="post-div" class="col-md-6 col-sm-12 mb-2 post_div" v-for="post in posts" :key="post.id">
           <h3 class="pt-3 mb-0">{{ post.title }}</h3>
           <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ post.userId }}</span></small>
           <p class="pt-3 mb-1">{{ post.content }}</p>
@@ -253,9 +253,8 @@ export default {
         axios.post(`http://localhost:3000/api/comments/new/${postId}`, formData,
         {
           headers: {
-             'content-type': 'application/json',
-              "Accept": "application/json",
-            "Authorization": 'Bearer ' + token
+              
+              "Authorization": 'Bearer ' + token
           }
         })
         .then(() => {

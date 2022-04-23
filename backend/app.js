@@ -7,6 +7,8 @@ const commentRoutes = require('./routes/comment');
 const app = express();
 
 
+const cors = require('cors');
+app.use(cors());
 
 //Accès à l'api
 app.use((req, res, next) => {
