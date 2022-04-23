@@ -42,7 +42,7 @@
       <div class="row">
         <div id="post-div" class="col-md-6 col-sm-12 mb-2 post_div" v-for="post in posts" :key="post.id">
           <h3 class="pt-3 mb-0">{{ post.title }}</h3>
-          <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ post.userId }}</span></small>
+          <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }}</span></small>
           <p class="pt-3 mb-1">{{ post.content }}</p>
           <p>{{post.id}}</p>
           <div class="form-group">
@@ -65,7 +65,7 @@
           </div>
           <!-- répondre au post -->
           <form>
-            <input class="form-control" v-model='content' type="text" id="content" name="content" placeholder="Ecris ton commentaire !" >
+            <input class="form-control" v-model='message' type="text" id="content" name="content" placeholder="Ecris ton commentaire !" >
             <button v-on:click='newComment(post.id)' type="button" id="btn_post_comment" class="mb-1"> Envoyer ma réponse !</button>
           </form>
         </div>
@@ -89,15 +89,15 @@ export default {
       data:JSON.parse(this.$localStorage.get('user')),
       userId: JSON.parse(this.$localStorage.get('userId')),
       isAdmin:JSON.parse(this.$localStorage.get('isAdmin')),
-      name:'',
-      posts:[],
+           name:'',
+           posts:[],
            title:'',
            content:'',
            dateAdd:'',
            id:'',
            media:'',
-      post:'',
-      comments:[]
+           post:'',
+           comments:[]
       
       
     }
