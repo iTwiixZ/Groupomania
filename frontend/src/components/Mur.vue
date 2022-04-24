@@ -65,7 +65,7 @@
           </div>
           <!-- répondre au post -->
           <form>
-            <input class="form-control" v-model='message' type="text" id="content" name="content" placeholder="Ecris ton commentaire !" >
+            <input class="form-control" v-model='content' type="text" id="content" name="content" placeholder="Ecris ton commentaire !" >
             <button v-on:click='newComment(post.id)' type="button" id="btn_post_comment" class="mb-1"> Envoyer ma réponse !</button>
           </form>
         </div>
@@ -238,10 +238,12 @@ export default {
                     console.log("Votre message n'a pas pu etre posté !");
                 });
     },
+    // Ajouter un commentaire 
     newComment: function(postId) {
         let token =localStorage.getItem('token');
         console.log(postId)
-        const comment = {
+        const comment = { 
+          postId: postId,
           content : this.content,
           userId : this.userId,
           media : this.img,
@@ -250,7 +252,7 @@ export default {
         formData.append('media', this.img)
         // formData.append('media', this.media);
         formData.append('comment', JSON.stringify(comment));
-        axios.post(`http://localhost:3000/api/comments/new/${postId}`, formData,
+        axios.post(`http://localhost:3000/api/comments/new`, formData,
         {
           headers: {
               

@@ -60,7 +60,7 @@ export default {
       .then((value) => {
         const userId = JSON.stringify(value.userId);
         localStorage.setItem("userId", userId);
-        alert('Maintenant connectez-vous !')
+        alert('Vous pouvez maintenant vous connectez !')
   
         
       })

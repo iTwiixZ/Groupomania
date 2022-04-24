@@ -17,14 +17,14 @@ module.exports = {
         const userId = jwtUtils.getUserId(headerAuth);
 
         //params
-        const content = req.body.content;
+        const content = JSON.parse(req.body.comment);
         const dateAdd = Date.now();
-        const postId = req.body.postId;
+        // const postId = req.body.postId;
         const mediaComment = req.file ? `${req.file.filename}` :  "";
         const comment = {
-            content: content,
+            content: content.content,
             userId: userId,
-            postId: postId,
+            postId: content.postId,
             media: mediaComment,
             dateAdd: dateAdd
         }
