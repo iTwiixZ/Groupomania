@@ -58,7 +58,8 @@
             <div id="commentdiv" class="comment mt-2 mb-2" v-for="comment in comments" :key="comment.id" >
               <div v-if="comment.postId == post.id">
               <p class="content">{{comment.content}}</p>
-              <small class="date">{{comment.createdAt}}</small>
+              <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }} le {{comment.createdAt}}</span></small>
+              
               <!-- bouton supprimer le commentaire -->
               <button v-on:click.prevent='deleteComment(comment.id)' v-if="comment.userId == userId || isAdmin == true" class="delete_comment"> Supprimer le commentaire </button>
               </div>
