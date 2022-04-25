@@ -16,7 +16,7 @@
     </header>
 
     <!-- Création d'un post -->
-    <div class="container" id="post_form">
+    <div class="container" id="post_form top">
         <form method="POST" enctype="multipart/form-data" id="form">
         <div class="form-group">
             <input id="input_size" class="form-control mb-1" v-model="title" type="title" placeholder="Le titre de votre post " size="50"  required aria-label="Titre du post ">
@@ -35,37 +35,39 @@
         <button v-on:click='newPost()' type="button" id="btn_post">Envoyer</button>
         </form>
     </div>
-<a href="#post_form"><button class="btn_top sticky-top" type="button">Ecrire un post</button></a>
+    <div id="scroll_to_top">
+<a href="#top"><button class="btn_top" type="button">Ecrire un post</button></a>
+</div>
 <div class='container mt-3' id='post'>
       <h2 class="text-center">Voici les dernières acutalités de votre communauté</h2>
       <!-- les posts -->
       <div class="row">
-        <div id="post-div" class=" col-sm-12 mb-2 post_div" v-for="post in posts" :key="post.id">
+        <div id="post-div" class="col-sm-12 mb-3 post_div" v-for="post in posts" :key="post.id">
           <h3 class="pt-3 mb-0">{{ post.title }}</h3>
           <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }}</span></small>
-          <p class="pt-3 mb-1">{{ post.content }}</p>
-          <p>{{post.id}}</p>
+          <p class="pt-3 h5 mb-1">{{ post.content }}</p>
+          <p>Publié le {{post.createdAt}}</p>
           <div class="form-group">
-            <img :src=" 'http://localhost:3000/images/' + post.media " class="img_posted" alt= "image du post " />
+            <img :src=" 'http://localhost:3000/images/' + post.media " class="img_posted mb-2" alt= "image du post " />
           </div>
           <!--  supprimer le post -->
           <button v-on:click.prevent='deletePost(post.id)' v-if="post.userId == userId || isAdmin == true" class="btn_delete_post"> Supprimer </button>
           <!--  commentaires -->
-          <button @click ="showComment(post.id)" type="button" class="btn_show"> Voir les commentaires </button>
+          <button @click ="showComment(post.id)" type="button" class="btn_show mb-2"> Voir les commentaires </button>
           <div v-show ='showComment' id='show_comment' >
-            <div id="commentdiv" class="comment" v-for="comment in comments" :key="comment.id" >
+            <div id="commentdiv" class="comment mt-2 mb-2" v-for="comment in comments" :key="comment.id" >
               <div v-if="comment.postId == post.id">
               <p class="content">{{comment.content}}</p>
               <small class="date">{{comment.createdAt}}</small>
               <!-- bouton supprimer le commentaire -->
-              <button v-on:click.prevent='deleteComment(comment.id)' v-if="comment.userId == userId || isAdmin == true" class=""> Supprimer le commentaire </button>
+              <button v-on:click.prevent='deleteComment(comment.id)' v-if="comment.userId == userId || isAdmin == true" class="delete_comment"> Supprimer le commentaire </button>
               </div>
             </div>
             <div id="noComment"></div>
           </div>
           <!-- répondre au post -->
           <form>
-            <input class="form-control" v-model='content' type="text" id="content" name="content" placeholder="Ecris ton commentaire !" >
+            <input class="form-control mb-2" v-model='content' type="text" id="content" name="content" placeholder="Ecris ton commentaire !" >
             <button v-on:click='newComment(post.id)' type="button" id="btn_post_comment" class="mb-1"> Envoyer ma réponse !</button>
           </form>
         </div>

@@ -25,7 +25,7 @@ module.exports = {
             content: content.content,
             userId: userId,
             postId: content.postId,
-            media: mediaComment,
+            // media: mediaComment,
             dateAdd: dateAdd
         }
 
