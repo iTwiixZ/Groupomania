@@ -20,7 +20,7 @@ module.exports = {
         const content = JSON.parse(req.body.comment);
         const dateAdd = Date.now();
         // const postId = req.body.postId;
-        const mediaComment = req.file ? `${req.file.filename}` :  "";
+        // const mediaComment = req.file ? `${req.file.filename}` :  "";
         const comment = {
             content: content.content,
             userId: userId,
@@ -83,7 +83,7 @@ module.exports = {
     deleteComment: function(req, res) {
         
         models.Comment.findOne({
-            where: {id: req.body.id},
+            where: {id: req.params.id},
         })
         .then( (comment) => {
             comment.destroy()

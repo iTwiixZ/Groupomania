@@ -163,7 +163,7 @@ export default {
         } )
           .then(response => {
               console.log(response.data)
-              alert('Votre message a été supprimé !')
+              alert('Votre post a été supprimé !')
               location.reload(true);
             })
             .catch(error => console.log(error));
@@ -246,10 +246,10 @@ export default {
           postId: postId,
           content : this.content,
           userId : this.userId,
-          media : this.img,
+          // media : this.img,
         }
         var formData = new FormData()
-        formData.append('media', this.img)
+        // formData.append('media', this.img)
         // formData.append('media', this.media);
         formData.append('comment', JSON.stringify(comment));
         axios.post(`http://localhost:3000/api/comments/new`, formData,

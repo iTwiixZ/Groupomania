@@ -10,7 +10,7 @@ const multer = require('../middleware/multer');
     router.post('/new', multer, comment.createComment);
     router.get('/getComments/:postId', multer, comment.getComments);
     router.get('/getAll', multer, comment.getAllComment);
-    router.delete('/delete', comment.deleteComment );
+    router.delete('/delete/:id', comment.deleteComment );
 
 
 module.exports = router;
