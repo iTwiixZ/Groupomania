@@ -35,12 +35,12 @@
         <button v-on:click='newPost()' type="button" id="btn_post">Envoyer</button>
         </form>
     </div>
-
+<a href="#post_form"><button class="btn_top sticky-top" type="button">Ecrire un post</button></a>
 <div class='container mt-3' id='post'>
       <h2 class="text-center">Voici les dernières acutalités de votre communauté</h2>
       <!-- les posts -->
       <div class="row">
-        <div id="post-div" class="col-md-6 col-sm-12 mb-2 post_div" v-for="post in posts" :key="post.id">
+        <div id="post-div" class=" col-sm-12 mb-2 post_div" v-for="post in posts" :key="post.id">
           <h3 class="pt-3 mb-0">{{ post.title }}</h3>
           <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }}</span></small>
           <p class="pt-3 mb-1">{{ post.content }}</p>
