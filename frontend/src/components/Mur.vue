@@ -2,6 +2,19 @@
 <div>
     <header class="container">
         <div class="container">
+          <div class="test">
+          <button class="" v-on:click="show" v-if="isAdmin == true">Afficher les post</button>
+          <div id="post_list" v-if="isDisplay" class="container">
+            <button class="" v-on:click="hide" v-if="isAdmin == true">Cacher les post</button>
+           <div class="container" v-for="post in posts" :key="post.id">
+             <h3 class="pt-3 mb-0">{{ post.title }}</h3>
+          <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }} postiD = {{post.id}}</span></small>
+          <p class="pt-3 h5 mb-1">{{ post.content }}</p>
+          <img :src=" 'http://localhost:3000/images/' + post.media " class="img_posted_admin mb-2" alt= "image du post " />
+          </div>
+          </div>
+          
+          </div>
           <div class="container d-flex justify-content-end">
             <!-- Bouton de déconnection -->
              <button v-on:click.prevent='logout()' type="button" id="logout_btn" > Déconnection</button>
@@ -89,8 +102,12 @@ import '../assets/mur.scss'
 export default {
   name:'mur',
   img:'',
+  div: '.test',
+  
   data() {
+    
     return {
+      isDisplay: false,
       data:JSON.parse(this.$localStorage.get('user')),
       userId: JSON.parse(this.$localStorage.get('userId')),
       isAdmin:JSON.parse(this.$localStorage.get('isAdmin')),
@@ -106,7 +123,7 @@ export default {
       
       
     }
-      
+    
   },
   mounted() {
     if (localStorage.name) {
@@ -131,6 +148,12 @@ export default {
     
   },
   methods: {
+    show: function () {
+      this.isDisplay = true;
+    },
+hide: function () {
+      this.isDisplay = false;
+    },
     // déconnexion
     logout: function () {
       localStorage.removeItem('token');
@@ -217,12 +240,11 @@ export default {
           content: this.content,
           // nom fichier url
           media: this.img,
-          // media: this.media,
           userId: this.userId,
         }
         var formData = new FormData()
         formData.append('media', this.img);
-        // formData.append('media', this.media);
+        
         formData.append('post', JSON.stringify(post));
         axios.post('http://localhost:3000/api/posts/new',
         formData ,{
@@ -251,11 +273,9 @@ export default {
           postId: postId,
           content : this.content,
           userId : this.userId,
-          // media : this.img,
+         
         }
         var formData = new FormData()
-        // formData.append('media', this.img)
-        // formData.append('media', this.media);
         formData.append('comment', JSON.stringify(comment));
         axios.post(`http://localhost:3000/api/comments/new`, formData,
         {
@@ -275,7 +295,7 @@ export default {
                 });
     },
     uploadFile(e) {
-      // this.img = e.target.files[0];
+      
        this.img = e.target.files[0];
        const file = e.target.files[0];
        if (file) {
@@ -293,7 +313,16 @@ export default {
                   
          }
       },
-    
+   
+     
   }
+ 
+    
+ 
+
 }
+
+
+  
+
 </script>
