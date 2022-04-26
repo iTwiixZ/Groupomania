@@ -2,10 +2,12 @@
 <div>
     <header class="container">
         <div class="container">
+          <div class="container d-flex justify-content-end">
             <!-- Bouton de déconnection -->
              <button v-on:click.prevent='logout()' type="button" id="logout_btn" > Déconnection</button>
              <!-- Suppression du compte  -->
             <button v-on:click.prevent='deleteCount(userId)' type="button" id='delete_btn' >Supprimer le compte</button>
+            </div>
             <div class="container d-flex justify-content-center align-items-center flex-column">
             <img class="w-50" src="../assets/icon-above-font.svg" alt="Logo">
             <h1 class="text-center">Bienvenue sur votre réseau {{name}} ! </h1>
