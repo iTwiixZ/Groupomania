@@ -2,19 +2,34 @@
 <div>
     <header class="container">
         <div class="container">
-          <div class="test">
-          <button class="" v-on:click="show" v-if="isAdmin == true">Afficher les post</button>
-          <div id="post_list" v-if="isDisplay" class="container">
-            <button class="" v-on:click="hide" v-if="isAdmin == true">Cacher les post</button>
+         
+          <div class="post">
+            <button class="list_post" v-on:click="show" v-if="isAdmin == true">Afficher les post</button>
+           <div id="post_list" v-if="isDisplay" class="container">
+            <button class="list_post" v-on:click="hide" v-if="isAdmin == true">Cacher les post</button>
            <div class="container" v-for="post in posts" :key="post.id">
              <h3 class="pt-3 mb-0">{{ post.title }}</h3>
           <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }} postiD = {{post.id}}</span></small>
           <p class="pt-3 h5 mb-1">{{ post.content }}</p>
           <img :src=" 'http://localhost:3000/images/' + post.media " class="img_posted_admin mb-2" alt= "image du post " />
+          <button v-on:click.prevent='deletePost(post.id)' v-if="isAdmin == true" class="btn_delete_post_admin"> Supprimer </button>
+          <button @click ="showComment(post.id)" type="button" class="list_post"> Voir les commentaires </button>
+          <div v-show ='showComment' id='show_comment'>
+            <div id="commentdiv" class="comment mt-2 mb-2" v-for="comment in comments" :key="comment.id" >
+               <div v-if="comment.postId == post.id">
+                 <p class="content">{{comment.content}}</p>
+              <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }} le {{comment.createdAt}}</span></small>
+               </div>
+               <button v-on:click.prevent='deleteComment(comment.id)' v-if="comment.userId == userId || isAdmin == true" class="delete_comment"> Supprimer le commentaire </button>
+            </div>
+          </div>
+          
           </div>
           </div>
           
           </div>
+
+
           <div class="container d-flex justify-content-end">
             <!-- Bouton de déconnection -->
              <button v-on:click.prevent='logout()' type="button" id="logout_btn" > Déconnection</button>
@@ -69,7 +84,7 @@
           <button v-on:click.prevent='deletePost(post.id)' v-if="post.userId == userId || isAdmin == true" class="btn_delete_post"> Supprimer </button>
           <!--  commentaires -->
           <button @click ="showComment(post.id)" type="button" class="btn_show mb-2"> Voir les commentaires </button>
-          <div v-show ='showComment' id='show_comment' >
+          <div v-show ='showComment' id='show_comment'>
             <div id="commentdiv" class="comment mt-2 mb-2" v-for="comment in comments" :key="comment.id" >
               <div v-if="comment.postId == post.id">
               <p class="content">{{comment.content}}</p>
@@ -102,7 +117,8 @@ import '../assets/mur.scss'
 export default {
   name:'mur',
   img:'',
-  div: '.test',
+  div: '.post',
+  
   
   data() {
     
@@ -151,6 +167,8 @@ export default {
     show: function () {
       this.isDisplay = true;
     },
+   
+   
 hide: function () {
       this.isDisplay = false;
     },

@@ -117,3 +117,28 @@
     bottom: 50px;
     left: 5px;
 }
+
+.btn_delete_post_admin{
+    cursor: pointer;
+    border: 0;
+    border-radius:15px ;
+    color: white;
+    transition: all 350ms ease-in;
+    height: 38px;
+    width: 145px;
+    margin-left: 25px;
+    background-color: #F44141;
+}
+
+.list_post{
+    cursor: pointer;
+    border: 0;
+    border-radius:15px ;
+    color: white;
+    transition: all 350ms ease-in;
+    height: 50px;
+    width: 165px;
+    margin-bottom: 25px;
+    margin-left: 20px;
+    background-color: #F44141;
+}
