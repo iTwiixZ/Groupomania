@@ -169,9 +169,13 @@ export default {
     },
    
    
-hide: function () {
+  hide: function () {
       this.isDisplay = false;
     },
+
+   
+
+
     // déconnexion
     logout: function () {
       localStorage.removeItem('token');
