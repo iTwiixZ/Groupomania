@@ -8,13 +8,14 @@ import VueLocalStorage from 'vue-localstorage'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import './assets/custom.scss'
 
+
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueLocalStorage)
 Vue.use(VueSessionStorage)
 Vue.use(Vuex)
-Vue.config.productionTip = false
 
+Vue.config.productionTip = false
 new Vue({
   router,
   store,

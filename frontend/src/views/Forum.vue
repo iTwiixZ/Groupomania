@@ -16,7 +16,7 @@ export default{
     name:'Forum',
     components:{
         mur,
-       
+      
        
         
     }

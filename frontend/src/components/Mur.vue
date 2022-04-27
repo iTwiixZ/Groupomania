@@ -4,7 +4,7 @@
         <div class="container">
          
           <div class="post">
-            <button class="list_post" v-on:click="show" v-if="isAdmin == true">Afficher les post</button>
+            <button class="list_post" v-on:click="show" v-if="isAdmin == true">Afficher les post et commentaires</button>
            <div id="post_list" v-if="isDisplay" class="container">
             <button class="list_post" v-on:click="hide" v-if="isAdmin == true">Cacher les post</button>
            <div class="container" v-for="post in posts" :key="post.id">
@@ -39,6 +39,7 @@
             <div class="container d-flex justify-content-center align-items-center flex-column">
             <img class="w-50" src="../assets/icon-above-font.svg" alt="Logo">
             <h1 class="text-center">Bienvenue sur votre réseau {{name}} ! </h1>
+            <p v-if="isAdmin == true">Vous êtes administrateur, vous pouvez supprimer les post et commentaires non conventionnels</p>
                 <p class=" h3 text-muted">Créer votre post, voir les publications et +.</p>
                 <span id="fleche"></span>
             </div>
