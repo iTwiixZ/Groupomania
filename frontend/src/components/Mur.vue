@@ -13,7 +13,7 @@
           <p class="pt-3 h5 mb-1">{{ post.content }}</p>
           <img :src=" 'http://localhost:3000/images/' + post.media " class="img_posted_admin mb-2" alt= "image du post " />
           <button v-on:click.prevent='deletePost(post.id)' v-if="isAdmin == true" class="btn_delete_post_admin"> Supprimer </button>
-          <button @click ="showComment(post.id)" type="button" class="list_post"> Voir les commentaires </button>
+          <button @click ="showComment(post.id)" class="list_comment"> Voir les commentaires </button>
           <div v-show ='showComment' id='show_comment'>
             <div id="commentdiv" class="comment mt-2 mb-2" v-for="comment in comments" :key="comment.id" >
                <div v-if="comment.postId == post.id">

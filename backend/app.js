@@ -4,6 +4,7 @@ const path = require('path');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
+const cookie        = require('cookie-session');
 const app = express();
 
 
@@ -20,7 +21,19 @@ app.use((req, res, next) => {
     next();
 });
 
+//Cookies
+const expiresDate = new Date(Date.now() + 60 * 60 * 1000);
 
+app.use(cookie({
+    secret: 'sessionS3cur3',
+    cookie: {
+        secure: true,
+        httpOnly: true,
+        domain: 'http://localhost:3000',
+        expires: expiresDate
+    }
+})
+);
 
 
 app.use(express.urlencoded({extended: true}));
