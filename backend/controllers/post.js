@@ -102,34 +102,7 @@ module.exports = {
         .catch((error) => {res.status(400).json({ error: error, message: "Une erreur est survenue" })});
     },
 
-    updatePost: function(req, res) {
-        //getting auth header.
-        const headerAuth = req.headers['authorization'];
-        const userId = jwtUtils.getUserId(headerAuth);
-        const id = req.body.id;
-
-        models.Post.findOne({ where: { id: req.params.id }})
-        .then(post => {
-            if(userId === post.userId){
-                const updatePost = {
-                    title: req.body.title,
-                    content: req.body.content,
-                }
-                 if (req.file) {
-                     updatePost.image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-                     const filename = post.image.split('/images/')[1];
-                     fs.unlinkSync(`images/${filename}`)
-                     console.log(post.image);
-                 }
-                models.Post.update(updatePost, {where: { id: req.params.id }})
-                .then(()=>res.status(200).json({ message: 'Post modifié !'}))
-                .catch(error => res.status(400).json({ error}))
-            } else {
-                return res.status(403).json({'error':'Unauthorize'})
-            }
-        })
-        .catch((error) => res.status(500).json({ error }));
-    }
+   
        
     
 }
