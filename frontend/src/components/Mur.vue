@@ -7,23 +7,23 @@
             <button class="list_post" v-on:click="show" v-if="isAdmin == true">Afficher les post</button>
            <div id="post_list" v-if="isDisplay" class="container">
             <button class="list_post" v-on:click="hide" v-if="isAdmin == true">Cacher les post</button>
-            <div class="table_style">
-           <table class="table table-bordered" v-for="post in posts" :key="post.id">
+            <div class="table_style container">
+           <table class="table table-bordered mt-2" v-for="post in posts" :key="post.id">
              <thead>
                <tr>
                  <th scope="col">Post id</th>
                  <th scope="col">Titre</th>
                  <th scope="col">Contenue</th>
-                 <!-- <th scope="col">Image</th> -->
+                 <th scope="col">Image</th>
                  <th scope="col">Publié par</th>
                </tr>
              </thead>
              <tbody>
                <tr>
                  <th scope="row">{{ post.id }}</th>
-                 <td>{{post.title}}</td>
-                 <td>{{post.content}}</td>
-                 <!-- <td><img :src=" 'http://localhost:3000/images/' + post.media " alt="Image du post" class="img_posted_admin"></td> -->
+                 <td class="title_width">{{post.title}}</td>
+                 <td class="content_width">{{post.content}}</td>
+                 <td><img :src=" 'http://localhost:3000/images/' + post.media " alt="Image du post" class="img_posted_admin"></td>
                   <td>{{name}}</td>
                  <td class="text-center"><button v-on:click.prevent='deletePost(post.id)' v-if="post.userId == userId || isAdmin == true" class="btn_delete_post_admin"> Supprimer </button></td>
                </tr>

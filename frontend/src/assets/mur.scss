@@ -45,8 +45,8 @@
 }
 
 .img_posted_admin{
-    width: 10%;
-    height: 10%;
+    width: 25%;
+    height: 15%;
 }
 .btn_show{
     cursor: pointer;
@@ -152,4 +152,18 @@
     width: 195px;
    margin-left: 10px;
     background-color: #F44141;
+}
+
+.table_style{
+    border:solid 2px #F44141;
+    border-radius: 5px;
+}
+
+.title_width{
+    width: 15%;
+    height: 20%;
+}
+.content_width{
+    width: 25%;
+    height: 50%;
 }
