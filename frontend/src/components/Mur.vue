@@ -58,6 +58,7 @@
             <input id="input_size" class="form-control mb-1" v-model="title" type="title" placeholder="Le titre de votre post " size="50"  required aria-label="Titre du post ">
         </div>
         <div class="form-group">
+            
             <input id="input_size" v-model='content' size="50" type="text" placeholder="Que se passe t-il ?" class="form-control mb-1">
         </div>
         <div>

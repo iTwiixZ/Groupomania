@@ -1,10 +1,12 @@
-const express = require('express');
-const path = require('path');
+const express       = require('express');
+const path          = require('path');
 //Routes
-const userRoutes = require('./routes/user');
-const postRoutes = require('./routes/post');
+const userRoutes    = require('./routes/user');
+const postRoutes    = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 const cookie        = require('cookie-session');
+const noCache       = require('nocache');
+const xssClean      = require('xss-clean');
 const app = express();
 
 
@@ -35,7 +37,8 @@ app.use(cookie({
 })
 );
 
-
+app.use(noCache());
+app.use(xssClean());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
