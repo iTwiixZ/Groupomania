@@ -5,12 +5,10 @@ import router from './router'
 import store from './store'
 import VueSessionStorage from 'vue-sessionstorage'
 import VueLocalStorage from 'vue-localstorage'
-import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import './assets/custom.scss'
 
 
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+
 Vue.use(VueLocalStorage)
 Vue.use(VueSessionStorage)
 Vue.use(Vuex)
