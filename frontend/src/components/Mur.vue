@@ -2,12 +2,12 @@
 <div>
     <header class="container">
         <div class="container">
-          
-          <div class="container d-flex justify-content-end">
-            <!-- Bouton pour administrateur -->
+           <div v-if="isAdmin = true">
             <router-link to="/admin">
-              <button id="admin_btn" v-if="isAdmin = true" type="button">Administration</button>
+              <button id="admin_btn"  type="button">Administration</button>
             </router-link>
+            </div>
+          <div class="container d-flex justify-content-end">
             <!-- Bouton de déconnection -->
              <button v-on:click.prevent='logout()' type="button" id="logout_btn" > Déconnection</button>
              <!-- Suppression du compte  -->
@@ -53,7 +53,7 @@
       <div class="row">
         <div id="post-div" class="col-sm-12 mb-3 post_div" v-for="post in posts" :key="post.id">
           <h3 class="pt-3 mb-0">{{ post.title }}</h3>
-          <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }}</span></small>
+          <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ post.userId }}</span></small>
           <p class="pt-3 h5 mb-1">{{ post.content }}</p>
           <p>Publié le {{post.createdAt}}</p>
           <div class="form-group">
@@ -67,7 +67,7 @@
             <div id="commentdiv" class="comment mt-2 mb-2" v-for="comment in comments" :key="comment.id" >
               <div v-if="comment.postId == post.id">
               <p class="content">{{comment.content}}</p>
-              <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ name }} le {{comment.createdAt}}</span></small>
+              <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ comment.userId }} le {{comment.createdAt}}</span></small>
               
               <!-- bouton supprimer le commentaire -->
               <button v-on:click.prevent='deleteComment(comment.id)' v-if="comment.userId == userId || isAdmin == true" class="delete_comment"> Supprimer le commentaire </button>

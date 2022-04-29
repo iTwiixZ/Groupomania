@@ -181,3 +181,37 @@
     margin-top: 15px;
     background-color: #F44141;
 }
+
+.list_user{
+    cursor: pointer;
+    border: 0;
+    border-radius:15px ;
+    color: white;
+    transition: all 350ms ease-in;
+    height: 50px;
+    width: 165px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 20px;
+    background-color: #F44141;
+}
+
+.user_width{
+    width: 25%;
+    height: 50%;
+}
+
+.email_width{
+    width: 25%;
+    height: 50%;
+}
+#delete_btn_admin{
+    cursor: pointer;
+    transition: all 450ms ease-in-out;
+    height: 45px;
+    width: auto;
+    border: 0;
+    border-radius: 15px;
+    color: white;
+    background-color: #F44141;
+}

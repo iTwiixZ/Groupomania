@@ -19,13 +19,12 @@ module.exports = {
         //params
         const content = JSON.parse(req.body.comment);
         const dateAdd = Date.now();
-        // const postId = req.body.postId;
-        // const mediaComment = req.file ? `${req.file.filename}` :  "";
+        
         const comment = {
             content: content.content,
             userId: userId,
             postId: content.postId,
-            // media: mediaComment,
+            
             dateAdd: dateAdd
         }
 

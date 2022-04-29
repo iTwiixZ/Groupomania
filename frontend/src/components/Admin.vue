@@ -1,6 +1,8 @@
 <template>
-  <div>
-   <div class="post">
+  <div v-if="isAdmin = true">
+    <h1 class="text-center mt-5">Bienvenue dans votre interface administrateur {{name}}</h1>
+    <p class="text-center mt-3">Vous pouvez supprimez les post non conformes et supprimer les utilisateurs</p>
+   <div class="post d-flex justify-content-center">
             <button class="list_post" v-on:click="show" >Afficher les post</button>
            <div id="post_list" v-if="isDisplay" class="container">
             <button class="list_post" v-on:click="hide">Cacher les post</button>
@@ -21,7 +23,7 @@
                  <td class="title_width">{{post.title}}</td>
                  <td class="content_width">{{post.content}}</td>
                  <td><img :src=" 'http://localhost:3000/images/' + post.media " alt="Image du post" class="img_posted_admin"></td>
-                  <td>{{name}}</td>
+                  <td>{{post.userId}}</td>
                  <td class="text-center"><button v-on:click.prevent='deletePost(post.id)' v-if="post.userId == userId || isAdmin == true" class="btn_delete_post_admin"> Supprimer </button></td>
                </tr>
              </tbody>
@@ -29,7 +31,33 @@
            </div>
           </div>
         </div>
-          
+          <div id="users" class="container d-flex justify-content-center">
+            <button class="list_user" v-on:click="showUser">Afficher les utilisateurs</button>
+               <div id="user_list" v-if="isUser" class="container">
+            <button class="list_user" v-on:click="hideUser">Cacher les utilisateurs</button>
+            <div class="table_style container">
+           <table class="table table-bordered mt-2" v-for="user in users" :key="user.id">
+             <thead>
+               <tr>
+                 <th scope="col">Nom d'utilisateur</th>
+                 <th scope="col">Adresse email</th>
+                 <th scope="col">User ID</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr>
+                 <td class="user_width">{{user.name}}</td>
+                 <td class="email_width">{{user.email}}</td>
+                 <td>{{user.id}}</td>
+                 
+                  
+                 <td class="text-center"><button class="text-center" v-if="isAdmin = true" v-on:click.prevent='deleteCount(user.id)' type="button" id='delete_btn_admin' >Supprimer l'utilisateur</button></td>
+               </tr>
+             </tbody>
+           </table>
+           </div>
+          </div>
+          </div>
 
           </div>
 </template>
@@ -44,12 +72,14 @@ export default {
   name:'admin',
   img:'',
   div: '.post',
+  id:  '#user',
   
   
   data() {
     
     return {
       isDisplay: false,
+      isUser: false,
       data:JSON.parse(this.$localStorage.get('user')),
       userId: JSON.parse(this.$localStorage.get('userId')),
       isAdmin:JSON.parse(this.$localStorage.get('isAdmin')),
@@ -61,7 +91,8 @@ export default {
            id:'',
            media:'',
            post:'',
-           comments:[]
+           comments:[],
+           user:[],
       
       
     }
@@ -78,8 +109,19 @@ export default {
         this.posts = res.data
         })
       .catch(error => console.log(error));
-    
+
+      // Utilisateurs
+       axios.get('http://localhost:3000/api/users/')
+       .then(res => {
+         console.log(res.data)
+         this.users = res.data
+       })
+        .catch(error => console.log(error));
   },
+
+ 
+  
+
   created() {
      
   },
@@ -99,7 +141,17 @@ export default {
       this.isDisplay = false;
     },
 
+   showUser: function () {
+      this.isUser = true;
+    },
    
+   
+  hideUser: function () {
+      this.isUser = false;
+    },
+   
+  // Afficher tous les utilisateurs
+
 
 
     // déconnexion
@@ -110,7 +162,7 @@ export default {
       localStorage.removeItem('isAdmin');
       this.$router.push('/');
       },
-    // supprimer un compte utilisateur
+    // supprimer un compte utilisateur pour l'admin
     deleteCount: function (userId) {
       axios.delete(`http://localhost:3000/api/users/${userId}`,
       {
@@ -121,11 +173,15 @@ export default {
         })
         .then(() =>{
           localStorage.clear();
-          this.$router.push('/');
-          alert('Votre compte a été supprimé !')
+          location.reload(true);
+          alert("L'utilisateur à été supprimer ")
         })
         .catch(error => console.log(error))
     },
+
+
+
+
     // supprimer un post
     deletePost: function (id) {
           let token =localStorage.getItem('token');

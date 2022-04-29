@@ -107,7 +107,7 @@ module.exports = {
 
     getAllUsers: function(req, res){
       models.Users.findAll({
-        attributes:["name", 'email'],
+        attributes:["name", 'email', 'id'],
       })
       .then(result => { res.status(200).json(result)})
       .catch(error => { res.status(400).json({ message: 'Something went wrong'
@@ -152,7 +152,7 @@ module.exports = {
         .catch((error) => {res.status(400).json({ error: error, message: "Une erreur est survenue" })});
       
     },
-    
+   
     //Déconnexion.
     logout: function (req, res) {
       res.cookie('jwt', '', { maxAge: 1 });
