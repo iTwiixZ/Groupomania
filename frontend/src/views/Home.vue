@@ -1,6 +1,6 @@
 <template>
     <div>
-    
+        
         <groupomania/>
         <login/>
     </div>
@@ -12,7 +12,7 @@
 
 import groupomania from '@/components/Groupomania.vue'
 import Login from '../components/Login.vue'
-
+import '../assets/log.scss'
 
 export default{
     name:'Home',

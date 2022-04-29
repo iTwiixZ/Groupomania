@@ -1,7 +1,7 @@
 <template>
-    <div class="mt-5 container d-flex justify-content-center flex-column">
+    <div class="mt-4 container d-flex justify-content-center flex-column">
       <form class="container d-flex justify-content-center">
-          <div class="form-group col-lg-3 col-sm-6">
+          <div class="form-group">
             <input class="form-control" v-model='email' type='email' placeholder="Email" size="50" required aria-label="Email de connection">
             <input class="form-control" v-model='password' type='password' placeholder="Mot de passe" size="50" required> 
           </div>
@@ -9,7 +9,6 @@
       </form> 
             <div class="container mt-4">
             <div class="container d-flex justify-content-center ">
-              
           <router-link to="/mur">
           <button  v-on:click.prevent='login()' type="button"  id='login'>Se connecter</button>
           </router-link>

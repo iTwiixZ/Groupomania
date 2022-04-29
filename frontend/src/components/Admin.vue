@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isAdmin = true">
+  <div v-if="isAdmin == true">
     <h1 class="text-center mt-5">Bienvenue dans votre interface administrateur {{name}}</h1>
     <p class="text-center mt-3">Vous pouvez supprimez les post non conformes et supprimer les utilisateurs</p>
    <div class="post d-flex justify-content-center">
@@ -51,7 +51,7 @@
                  <td>{{user.id}}</td>
                  
                   
-                 <td class="text-center"><button class="text-center" v-if="isAdmin = true" v-on:click.prevent='deleteCount(user.id)' type="button" id='delete_btn_admin' >Supprimer l'utilisateur</button></td>
+                 <td class="text-center"><button class="text-center" v-if="post.userId == userId || isAdmin == true" v-on:click.prevent='deleteCount(user.id)' type="button" id='delete_btn_admin' >Supprimer l'utilisateur</button></td>
                </tr>
              </tbody>
            </table>

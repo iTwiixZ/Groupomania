@@ -2,12 +2,14 @@
 <div>
     <header class="container">
         <div class="container">
-           <div v-if="isAdmin = true">
-            <router-link to="/admin">
-              <button id="admin_btn"  type="button">Administration</button>
-            </router-link>
-            </div>
+           
+            
+            
           <div class="container d-flex justify-content-end">
+            <!-- Bouton admin -->
+            <router-link v-if="isAdmin == true" to="/admin">
+              <button id="admin_btn" v-if="isAdmin == true"  type="button">Administration</button>
+            </router-link>
             <!-- Bouton de déconnection -->
              <button v-on:click.prevent='logout()' type="button" id="logout_btn" > Déconnection</button>
              <!-- Suppression du compte  -->
@@ -102,7 +104,7 @@ export default {
   data() {
     
     return {
-      isDisplay: false,
+      
       data:JSON.parse(this.$localStorage.get('user')),
       userId: JSON.parse(this.$localStorage.get('userId')),
       isAdmin:JSON.parse(this.$localStorage.get('isAdmin')),
@@ -143,14 +145,7 @@ export default {
     
   },
   methods: {
-    show: function () {
-      this.isDisplay = true;
-    },
    
-   
-  hide: function () {
-      this.isDisplay = false;
-    },
 
    
 
