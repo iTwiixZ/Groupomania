@@ -5,6 +5,7 @@ const models = require('../models');
 const jwtUtils = require('../middleware/auth');
 
 
+
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/;
 
@@ -101,6 +102,18 @@ module.exports = {
         return res.status(500).json({ 'error': 'unable to verify user'});
       });
     },
+  
+    // Récupérer tous les utilisateurs
+
+    getAllUsers: function(req, res){
+      models.Users.findAll({
+        attributes:["name", 'email'],
+      })
+      .then(result => { res.status(200).json(result)})
+      .catch(error => { res.status(400).json({ message: 'Something went wrong'
+      });
+  });
+    },
 
     // voir un profil.
     getUser: function(req, res) {
@@ -145,6 +158,10 @@ module.exports = {
       res.cookie('jwt', '', { maxAge: 1 });
       res.redirect('/');
       
-    }
+    },
+
+    
+
+  
       
-};
+}

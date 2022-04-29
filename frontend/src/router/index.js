@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Forum from '../views/Forum.vue'
+import Admin from '../views/Administration.vue'
 import signup from '../components/Signup.vue'
 import update from '../views/Update.vue'
 
@@ -14,6 +15,13 @@ const routes = [
     component: Home,
     
   },
+
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+  },
+
   {
     path: '/forum',
     name: 'Forum',
