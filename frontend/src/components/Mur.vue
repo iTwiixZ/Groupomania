@@ -11,7 +11,7 @@
               <button id="admin_btn" v-if="isAdmin == true"  type="button">Administration</button>
             </router-link>
             <!-- Bouton de déconnection -->
-             <button v-on:click.prevent='logout()' type="button" id="logout_btn" > Déconnection</button>
+             <button v-on:click.prevent='logout()' type="button" id="logout_btn" > Déconnexion</button>
              <!-- Suppression du compte  -->
             <button v-on:click.prevent='deleteCount(userId)' type="button" id='delete_btn' >Supprimer le compte</button>
             </div>
