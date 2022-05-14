@@ -1,7 +1,7 @@
 //Imports
 const jwt = require('jsonwebtoken');
 
-const JWT_SIGN_SECRET = 'FlpC24SAx21neR';
+const JWT_SIGN_SECRET = 'fghojpmolkjghfrtrzey346RTYU5678';//doit etre cacher dans un autre dossier avant d'envoyer sur github.
 
 //Exported functions
 module.exports = {

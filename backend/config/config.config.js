@@ -1,0 +1,1 @@
+const JWT_SIGN_SECRET = '9okjhfc9864vjlkjbjvgxfdgf5678';
