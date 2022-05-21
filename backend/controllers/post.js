@@ -4,7 +4,7 @@ const models = require('../models');
 
 const jwt = require('jsonwebtoken'); // création et vérification des tokens d'authentification.
 
-const jwtUtils = require('../middleware/auth');
+const jwtUtils = require('../middleware/auth.js');
 
 
 //Routes

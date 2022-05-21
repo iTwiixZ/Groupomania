@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt'); //création d'un mot de passe hashé.
-
+const jwt    = require('jsonwebtoken');
+const dotenv  = require('dotenv').config();
 const models = require('../models');
-
 const jwtUtils = require('../middleware/auth');
+
 
 
 
