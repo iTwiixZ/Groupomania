@@ -58,6 +58,13 @@ export default {
                   localStorage.setItem("userId", response.data.userId);
                   localStorage.setItem("name", response.data.name);
                   localStorage.setItem("isAdmin",response.data.isAdmin);
+                   this.$swal({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Vous êtes maintenant connecté !',
+                    showConfirmButton: false,
+                    timer: 1800
+                  });
                   this.$router.push('/forum')
                 });
             }

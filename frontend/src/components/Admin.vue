@@ -154,14 +154,7 @@ export default {
 
 
 
-    // déconnexion
-    logout: function () {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('name');
-      localStorage.removeItem('isAdmin');
-      this.$router.push('/');
-      },
+    
     // supprimer un compte utilisateur pour l'admin
     deleteCount: function (userId) {
       axios.delete(`http://localhost:3000/api/users/${userId}`,
@@ -172,9 +165,15 @@ export default {
           }
         })
         .then(() =>{
-          localStorage.clear();
-          location.reload(true);
-          alert("L'utilisateur à été supprimer ")
+          this.$swal({
+                   position: 'top-center',
+                   icon: 'success',
+                   title: `L'utilisateur à bien été supprimer !`,
+                   showConfirmButton: false,
+                   timer: 2200
+                 });
+          
+          window.setTimeout(function(){location.reload()},2500);
         })
         .catch(error => console.log(error))
     },
@@ -195,29 +194,19 @@ export default {
         } )
           .then(response => {
               console.log(response.data)
-              alert('Votre post a été supprimé !')
-              location.reload(true);
+                this.$swal({
+                   position: 'top-center',
+                   icon: 'success',
+                   title: `Le post a bien été supprimer !`,
+                   showConfirmButton: false,
+                   timer: 2200
+                 });
+          
+          window.setTimeout(function(){location.reload()},2500);
             })
             .catch(error => console.log(error));
     },
-    // supprimer un commentaire
-    deleteComment: function (id) {
-          let token =localStorage.getItem('token');
-          axios.delete(`http://localhost:3000/api/comments/delete/${id}`,
-          {
-          headers: {
-            'content-type': 'application/json',
-            "Accept": "application/json",
-            'Authorization': 'Bearer ' + token
-          }
-        } )
-          .then(response => {
-              console.log(response.data)
-              alert('Votre commentaire a été supprimé !')
-              location.reload(true);
-            })
-            .catch(error => console.log(error));
-    },
+  
     // les commentaires
     showComment: function(postId) {
       let show_comment = document.getElementById('show_comment');
