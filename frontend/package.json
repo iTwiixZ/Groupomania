@@ -17,6 +17,7 @@
     "vue-localstorage": "^0.6.2",
     "vue-router": "^3.5.1",
     "vue-sessionstorage": "^1.0.0",
+    "vue-sweetalert2": "^5.0.5",
     "vuex": "^3.6.2"
   },
   "devDependencies": {

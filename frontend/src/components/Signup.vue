@@ -20,6 +20,7 @@
 </template>
 
 <script>
+
 import '../assets/btn.scss'
 export default {
   name: 'signup',
@@ -60,12 +61,17 @@ export default {
       .then((value) => {
         const userId = JSON.stringify(value.userId);
         localStorage.setItem("userId", userId);
-        alert('Vous pouvez maintenant vous connectez !')
+        this.$swal('Félicitation',
+                'Vous pouvez maintenant vous connecter !',
+                'success');
   
         
       })
-      .catch(alert)
-       
+      .catch()
+        this.$swal('Erreur',
+          `Le mot de passe doit comporter au moins 4 caractères, pas plus de 8 caractères et doit inclure au moins une lettre majuscule, une lettre minuscule et un chiffre. L'Email doit être valide et le nom ne doit pas dépasser 12 caractères`,
+          "error"
+        );
       }
   }
 }

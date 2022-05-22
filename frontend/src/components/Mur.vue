@@ -253,8 +253,14 @@ export default {
                   console.log('post envoyé !')
                   console.log( post )
                   this.post ==="";
-                  alert('Votre message a bien été envoyé !')
-                  location.reload(true);
+                  this.$swal({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Votre post a bien été envoyé !',
+                    showConfirmButton: false,
+                    timer: 2300
+                  });
+                  window.setTimeout(function(){location.reload()},3000);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -282,8 +288,14 @@ export default {
         })
         .then(() => {
           console.log('commentaire envoyé' + comment );
-          alert('Votre commentaire a bien été envoyé !')
-          location.reload(true);
+           this.$swal({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Votre commentaire a bien été envoyé !',
+                    showConfirmButton: false,
+                    timer: 2300
+                  });
+                  window.setTimeout(function(){location.reload()},3000);
         })
         .catch((error) => {
                     console.log(error);
