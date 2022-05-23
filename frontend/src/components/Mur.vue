@@ -169,8 +169,14 @@ export default {
         })
         .then(() =>{
           localStorage.clear();
+           this.$swal({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Votre compte a bien été supprimer !',
+                    showConfirmButton: false,
+                    timer: 2300
+                  });
           this.$router.push('/');
-          alert('Votre compte a été supprimé !')
         })
         .catch(error => console.log(error))
     },
@@ -187,8 +193,14 @@ export default {
         } )
           .then(response => {
               console.log(response.data)
-              alert('Votre post a été supprimé !')
-              location.reload(true);
+                this.$swal({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Votre post a bien été supprimer !',
+                    showConfirmButton: false,
+                    timer: 2200
+                  });
+              window.setTimeout(function(){location.reload()},2500);
             })
             .catch(error => console.log(error));
     },
@@ -205,8 +217,14 @@ export default {
         } )
           .then(response => {
               console.log(response.data)
-              alert('Votre commentaire a été supprimé !')
-              location.reload(true);
+               this.$swal({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Votre commentaire a bien été supprimer !',
+                    showConfirmButton: false,
+                    timer: 2200
+                  });
+              window.setTimeout(function(){location.reload()},2500);
             })
             .catch(error => console.log(error));
     },
@@ -260,7 +278,7 @@ export default {
                     showConfirmButton: false,
                     timer: 2300
                   });
-                  window.setTimeout(function(){location.reload()},3000);
+                  window.setTimeout(function(){location.reload()},2500);
                 })
                 .catch((error) => {
                     console.log(error);
