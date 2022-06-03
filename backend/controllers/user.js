@@ -5,11 +5,6 @@ const models = require('../models');
 const jwtUtils = require('../middleware/auth');
 
 
-
-
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/;
-
 module.exports = {
     //save user.
     signup: function(req, res) {
@@ -19,22 +14,6 @@ module.exports = {
         const password = req.body.password;
 
         console.log(req.body)
-
-        if (name == null || email == null || password == null ) {
-            return res.status(400).json({'error': 'missing parameters'});
-        }
-
-        if (name.length >= 13 || name.length <= 2) {
-          return res.status(400).json({ 'error': 'wrong name (must be length 2 - 12)'});
-        }
-
-        if (!EMAIL_REGEX.test(email)){
-          return res.status(400).json({'error': 'Email non valide'});
-        }
-
-        if (!PASSWORD_REGEX.test(password)){
-          return res.status(400).json({ 'error': ' Password must be at least 4 characters, no more than 8 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit.'})
-        }
 
         models.Users.findOne({
             attributes: ['email'],
