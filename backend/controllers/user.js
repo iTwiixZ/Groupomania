@@ -118,17 +118,10 @@ exports.deleteUser = (req, res, next) => {
   .catch(error =>  res.status(500).json({ error: 'Une erreur est survenue' }));
 };
 
-// Méthode pour récuperer tous les utilisateurs pour l'admin
-
-exports.getAllUsers = (req, res, next) => {
-  models.Users.FindAll({attributes: ["name","email", "id"]})
-  .then(result => { res.status(200).json(result)})
-  .catch(error => res.status(404).json(error))
-};
 
 // Méthode pour récuperer un utilisateur
 
-exports.getOneUser =  (req, res, next) =>{
+exports.getOneUser =  (req, res) =>{
   
      models.Users.findOne({
       attributes: ['name', 'email'],
@@ -145,3 +138,13 @@ exports.getOneUser =  (req, res, next) =>{
       res.status(500).json({ error: 'Impossible de voir le profil !'})
     });
   };
+  
+// Méthode pour récuperer tous les utilisateurs pour l'admin
+exports.getAllUsers = (req, res) => {
+  models.Users.findAll({attributes: ["name","email", "id"],
+})
+  .then(result => { res.status(200).json(result)})
+  .catch(error => { res.status(400).json({ message: 'Something went wrong'
+  });
+});
+};
