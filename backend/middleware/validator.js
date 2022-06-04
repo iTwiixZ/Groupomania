@@ -3,7 +3,7 @@ const { check, validationResult } = require('express-validator');
 const validate = [
     check('email')
     .isEmail()
-    .isLength({min: 5})
+    .isLength({min: 4})
     .withMessage('Email inavlide')
     .normalizeEmail(),
     check('email')
