@@ -4,10 +4,10 @@ const models = require('../models');
 
 const decodeUid = (authorization) => {
     const token = authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, 'RAMDOM_TOKEN_SECRET');
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
     return {
         id: decodedToken.userId,
-        clearance: decodedToken.account,
+        // clearance: decodedToken.account,
     };
 };
 // Méthode pour la création des posts

@@ -1,8 +1,8 @@
 const express = require('express');
-const router = express.Router();
-const posts = require('../controllers/post');
-const auth = require('../middleware/auth');
-const multer =  require('../middleware/multer');
+const router  = express.Router();
+const posts   = require('../controllers/post');
+const auth    = require('../middleware/auth');
+const multer  =  require('../middleware/multer');
 
 
 

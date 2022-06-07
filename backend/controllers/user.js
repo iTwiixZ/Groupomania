@@ -75,7 +75,7 @@ exports.login = (req,res, next) => {
             userId: user.id,
             isAdmin: user.isAdmin,
             token: jwt.sign({
-            userId: user.userId,
+            userId: user.id,
             isAdmin: user.isAdmin,
           },
             'RANDOM_TOKEN_SECRET',{

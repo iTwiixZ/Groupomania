@@ -106,6 +106,7 @@ export default {
     return {
       
       data:JSON.parse(this.$localStorage.get('user')),
+      token:JSON.parse(this.$localStorage.get('token')),
       userId: JSON.parse(this.$localStorage.get('userId')),
       isAdmin:JSON.parse(this.$localStorage.get('isAdmin')),
            name:'',
@@ -125,9 +126,17 @@ export default {
   mounted() {
     if (localStorage.name) {
       this.name = localStorage.name;
+      this.token = localStorage.token;
     }
     // posts
-    axios.get('http://localhost:3000/api/posts/getAll') 
+    console.log(this.token);
+    axios.get('http://localhost:3000/api/posts/getAll', {
+          headers: {
+             'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            'Authorization': 'Bearer ' + this.token
+          }
+        }) 
       .then(res => { 
         console.log(res.data)
         this.posts = res.data
