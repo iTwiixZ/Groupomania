@@ -105,15 +105,15 @@ export default {
     
     return {
       
-      data:JSON.parse(this.$localStorage.get('user')),
-      token:JSON.parse(this.$localStorage.get('token')),
-      userId: JSON.parse(this.$localStorage.get('userId')),
-      isAdmin:JSON.parse(this.$localStorage.get('isAdmin')),
+      data:   this.$localStorage.get('user'),
+      userId: this.$localStorage.get('userId'),
+      isAdmin:this.$localStorage.get('isAdmin'),
+      token:  this.$localStorage.get('token'),
            name:'',
            posts:[],
            title:'',
            content:'',
-           dateAdd:'',
+           createdAt:'',
            id:'',
            media:'',
            post:'',
@@ -132,8 +132,8 @@ export default {
     console.log(this.token);
     axios.get('http://localhost:3000/api/posts/getAll', {
           headers: {
-             'Content-Type': 'application/json',
-              'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
             'Authorization': 'Bearer ' + this.token
           }
         }) 
@@ -261,7 +261,6 @@ export default {
         const post = {
           title: this.title,
           content: this.content,
-          // nom fichier url
           media: this.img,
           userId: this.userId,
         }
@@ -309,7 +308,8 @@ export default {
         axios.post(`http://localhost:3000/api/comments/new`, formData,
         {
           headers: {
-              
+              'content-type': 'application/json',
+              "Accept": "application/json",
               "Authorization": 'Bearer ' + token
           }
         })

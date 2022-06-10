@@ -31,7 +31,7 @@ module.exports = {
       likes: {
         type: Sequelize.INTEGER
       },
-      createdAt: {
+      dateAdd: {
         allowNull: false,
         type: Sequelize.DATE
       },

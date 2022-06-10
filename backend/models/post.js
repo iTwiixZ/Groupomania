@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING,
     dateAdd: DataTypes.DATE,
     media: DataTypes.STRING,
-    likes: DataTypes.INTEGER,
+    
   },{
     
     clasMethods: {

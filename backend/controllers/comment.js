@@ -1,17 +1,21 @@
-const models = require('../models')
+const models = require('../models');
+const { createPost } = require('./post');
 
 
 // Méthode pour créer un commentaire 
 
 exports.createComment = (res, req , next) => {
-    const content = JSON.parse(req.body.comment);
+    const content = req.body.content;
     const userId  = req.user.id;
+    const postId  = req.body.postId;
+    const mediaComment = req.file ? `${req.file.filename}` :  "";
     const dateAdded = Date.now();
     const comment = {
         content: content.content,
         userId: userId,
-        postId: content.postId,
-        dateAdded: dateAdded
+        postId: postId,
+        media:  mediaComment,
+        dateAdd: dateAdded
     }
 
     if ( content == null) {

@@ -79,10 +79,10 @@ export default {
     
     return {
       isDisplay: false,
-      isUser: false,
-      data:JSON.parse(this.$localStorage.get('user')),
-      userId: JSON.parse(this.$localStorage.get('userId')),
-      isAdmin:JSON.parse(this.$localStorage.get('isAdmin')),
+      isUser:    false,
+      data:      this.$localStorage.get('user'),
+      userId:    this.$localStorage.get('userId'),
+      isAdmin:   this.$localStorage.get('isAdmin'),
            name:'',
            posts:[],
            title:'',
@@ -101,6 +101,7 @@ export default {
   mounted() {
     if (localStorage.name) {
       this.name = localStorage.name;
+      this.token = localStorage.token;
     }
     // posts
     axios.get('http://localhost:3000/api/posts/getAll') 

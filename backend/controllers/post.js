@@ -12,12 +12,13 @@ const decodeUid = (authorization) => {
 };
 // Méthode pour la création des posts
 exports.createPost = (req, res, next) => {
-    console.log('Post crée:', req.body.post);
+    
     const post    = JSON.parse(req.body.post);
     const user    = decodeUid(req.headers.authorization);
-    const media   = req.file ? `${req.file.filename}` : '';
     const title   = post.title;
     const content = post.content;
+    const media   = req.file ? `${req.file.filename}` : '';
+    
 
     if (title == null || content == null) {
         return res.status(400).json({error: 'Il manque quelque chose au post !'});
