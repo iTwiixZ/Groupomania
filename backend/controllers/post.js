@@ -7,7 +7,7 @@ const decodeUid = (authorization) => {
     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
     return {
         id: decodedToken.userId,
-        // clearance: decodedToken.account,
+        
     };
 };
 // Méthode pour la création des posts
@@ -27,7 +27,7 @@ exports.createPost = (req, res, next) => {
         title:   title,
         content: content,
         media:   media,
-        userId:  user,
+        userId:  user.id,
         dateAdd: Date.now()
     })
     .then(result => {

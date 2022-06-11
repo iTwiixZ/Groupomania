@@ -105,11 +105,11 @@ export default {
     
     return {
       
-      data:   this.$localStorage.get('user'),
+      name:   this.$localStorage.get('user'),
       userId: this.$localStorage.get('userId'),
       isAdmin:this.$localStorage.get('isAdmin'),
       token:  this.$localStorage.get('token'),
-           name:'',
+           
            posts:[],
            title:'',
            content:'',
@@ -128,6 +128,7 @@ export default {
       this.name = localStorage.name;
       this.token = localStorage.token;
     }
+    console.log('administrateur: ' + this.isAdmin);
     // posts
     console.log(this.token);
     axios.get('http://localhost:3000/api/posts/getAll', {

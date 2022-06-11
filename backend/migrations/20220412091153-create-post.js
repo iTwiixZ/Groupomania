@@ -28,17 +28,12 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING
       },
-      likes: {
-        type: Sequelize.INTEGER
-      },
+      
       dateAdd: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
+     
     });
   },
   async down(queryInterface, Sequelize) {
