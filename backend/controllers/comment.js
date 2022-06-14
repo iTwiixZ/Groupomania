@@ -13,9 +13,10 @@ const decodeUid = (authorization) => {
 
 exports.createComment = (req, res, next) => {
         const user = decodeUid(req.headers.authorization);
-        const content = req.body.content;
+        let commentBody = req.body.comment;
+        const content = commentBody.content;
         const dateAdd = Date.now();
-        const postId = req.body.postId;
+        const postId = commentBody.postId;
         const comment = {
             content: content,
             userId: user.id,

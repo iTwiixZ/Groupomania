@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     content: DataTypes.STRING,
     dateAdd: DataTypes.DATE,
-    media: DataTypes.STRING,
-    likes: DataTypes.INTEGER
+    
   },{
     clasMethods: {
       associate: function(models){

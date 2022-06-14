@@ -304,9 +304,11 @@ export default {
           userId : this.userId,
          
         }
-        var formData = new FormData()
-        formData.append('comment', JSON.stringify(comment));
-        axios.post(`http://localhost:3000/api/comments/new`, formData,
+        let formData2 = new FormData();
+        
+        formData2.append('comment', JSON.stringify(comment));
+        console.log(formData2);
+        axios.post(`http://localhost:3000/api/comments/new`, comment,
         {
           headers: {
               
