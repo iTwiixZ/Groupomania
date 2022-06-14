@@ -21,7 +21,7 @@ exports.createPost = (req, res, next) => {
     
 
     if (title == null || content == null) {
-        return res.status(400).json({error: 'Il manque quelque chose au post !'});
+        return res.status(400).json({'error': 'toto missing parameters'});
     }
         models.Post.create({
         title:   title,
@@ -79,4 +79,4 @@ exports.getAllPosts = (req, res, next) => {
     .then((result) => {res.status(200).json(result)})
     .catch((error) => {res.status(400).json({message: 'Erreur innatendu'});
     });
-}
+};

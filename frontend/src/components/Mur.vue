@@ -309,8 +309,7 @@ export default {
         axios.post(`http://localhost:3000/api/comments/new`, formData,
         {
           headers: {
-              'content-type': 'application/json',
-              "Accept": "application/json",
+              
               "Authorization": 'Bearer ' + token
           }
         })
