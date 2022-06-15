@@ -20,8 +20,8 @@ exports.createPost = (req, res, next) => {
     const media   = req.file ? `${req.file.filename}` : '';
     
 
-    if (title == null || content == null) {
-        return res.status(400).json({'error': 'toto missing parameters'});
+    if (title == null || content == null || media == null) {
+        return res.status(400).json({error: 'toto missing parameters'});
     }
         models.Post.create({
         title:   title,
