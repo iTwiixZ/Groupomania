@@ -109,28 +109,24 @@ export default {
       userId: this.$localStorage.get('userId'),
       isAdmin:this.$localStorage.get('isAdmin'),
       token:  this.$localStorage.get('token'),
-           
-           posts:[],
-           title:'',
-           content:'',
-           createdAt:'',
-           id:'',
-           media:'',
-           post:'',
-           comments:[]
-      
-      
-    }
-    
-  },
+      posts:[],
+      title:'',
+      content:'',
+      createdAt:'',
+      id:'',
+      media:'',
+      post:'',
+      comments:[]
+      }
+      },
+
   mounted() {
     if (localStorage.name) {
       this.name = localStorage.name;
-      this.token = localStorage.token;
+      // this.token = localStorage.token;
     }
     console.log('administrateur: ' + this.isAdmin);
     // posts
-    console.log(this.token);
     axios.get('http://localhost:3000/api/posts/getAll', {
           headers: {
             'Content-Type': 'application/json',
@@ -143,11 +139,11 @@ export default {
         this.posts = res.data
         })
       .catch(error => console.log(error));
-    
-  },
+    },
+
   created() {
-     
   },
+
   watch: {
     username(newName) {
       localStorage.name = newName;
@@ -155,12 +151,7 @@ export default {
     
   },
   methods: {
-   
-
-   
-
-
-    // déconnexion
+   // déconnexion
     logout: function () {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
@@ -223,8 +214,7 @@ export default {
             'content-type': 'application/json',
             "Accept": "application/json",
             'Authorization': 'Bearer ' + token
-          }
-        } )
+          }})
           .then(response => {
               console.log(response.data)
                this.$swal({
@@ -240,6 +230,7 @@ export default {
     },
     // les commentaires
     showComment: function(postId) {
+      let token = localStorage.getItem('token');
       let show_comment = document.getElementById('show_comment');
       if(getComputedStyle(show_comment).display != "block"){
         show_comment.style.display = "none"
@@ -247,13 +238,19 @@ export default {
             show_comment.style.display = "block"
           }
       
-      axios.get(`http://localhost:3000/api/comments/getComments/${postId}`)
-            .then(response => {
-              console.log(response.data)
-              this.comments =response.data
-            })
-            .catch(error => console.log(error));
-      
+      axios.get(`http://localhost:3000/api/comments/getComments/${postId}`,
+         {
+          headers: {
+              'content-type': 'application/json',
+              "Accept": "application/json",
+              'Authorization': 'Bearer ' + token
+           }})
+            .then(res => { 
+        console.log(res.data)
+        this.comments = res.data
+        })
+      .catch(error => console.log(error));
+        
       
       },
     // creation nouveau post
