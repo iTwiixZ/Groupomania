@@ -29,11 +29,11 @@
     <div class="container" id="post_form top">
         <form method="POST" enctype="multipart/form-data" id="form">
         <div class="form-group">
-            <input id="input_size" class="form-control mb-1" v-model="title" type="title" placeholder="Le titre de votre post " size="50"  required aria-label="Titre du post ">
+            <input id="input_size" class="form-control mb-1" v-model="title" type="title" placeholder="Le titre de votre post "  required aria-label="Titre du post ">
         </div>
         <div class="form-group">
             
-            <input id="input_size" v-model='content' size="50" type="text" placeholder="Que se passe t-il ?" class="form-control mb-1">
+            <input id="input_size" v-model='content'  type="text" placeholder="Que se passe t-il ?" class="form-control mb-1">
         </div>
         <div>
         <div v-if="media">
@@ -304,11 +304,11 @@ export default {
           userId : this.userId,
          
         }
-        let formData2 = new FormData();
+        let formData = new FormData();
         
-        formData2.append('comment', JSON.stringify(comment));
-        console.log(formData2);
-        axios.post(`http://localhost:3000/api/comments/new`, comment,
+        formData.append('comment', JSON.stringify(comment));
+        console.log(formData);
+        axios.post(`http://localhost:3000/api/comments/new`, formData,
         {
           headers: {
               

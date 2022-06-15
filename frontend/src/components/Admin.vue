@@ -80,10 +80,10 @@ export default {
     return {
       isDisplay: false,
       isUser:    false,
-      data:      this.$localStorage.get('user'),
+      name:      this.$localStorage.get('user'),
       userId:    this.$localStorage.get('userId'),
       isAdmin:   this.$localStorage.get('isAdmin'),
-           name:'',
+           
            posts:[],
            title:'',
            content:'',
@@ -151,7 +151,7 @@ export default {
       this.isUser = false;
     },
    
-  // Afficher tous les utilisateurs
+  
 
 
 
@@ -207,25 +207,6 @@ export default {
             })
             .catch(error => console.log(error));
     },
-  
-    // les commentaires
-    showComment: function(postId) {
-      let show_comment = document.getElementById('show_comment');
-      if(getComputedStyle(show_comment).display != "block"){
-        show_comment.style.display = "none"
-        } else {
-            show_comment.style.display = "block"
-          }
-      
-      axios.get(`http://localhost:3000/api/comments/getComments/${postId}`)
-            .then(response => {
-              console.log(response.data)
-              this.comments =response.data
-            })
-            .catch(error => console.log(error));
-      
-      
-      },
     
   }
  

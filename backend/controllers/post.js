@@ -19,9 +19,15 @@ exports.createPost = (req, res, next) => {
     const content = post.content;
     const media   = req.file ? `${req.file.filename}` : '';
     
+    const TITLE_LIMIT   = 1;
+    const CONTENT_LIMIT = 1;
 
     if (title == null || content == null || media == null) {
         return res.status(400).json({error: 'toto missing parameters'});
+    }
+
+    if (title.length <=  TITLE_LIMIT || content.length <= CONTENT_LIMIT ) {
+        return res.status(400).json({'error': 'invalid parameters'});
     }
         models.Post.create({
         title:   title,
