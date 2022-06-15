@@ -41,7 +41,7 @@ export default {
   methods: {
     
       login : function () {
-          let token = JSON.parse(localStorage.getItem('data'));
+          let token = localStorage.getItem('data');
               axios.post('http://localhost:3000/api/users/login', {
                   email: this.email,
                   password: this.password,

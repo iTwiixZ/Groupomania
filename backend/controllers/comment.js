@@ -13,7 +13,7 @@ const decodeUid = (authorization) => {
 
 exports.createComment = (req, res, next) => {
         const user = decodeUid(req.headers.authorization);
-        let commentBody = req.body.comment;
+        let commentBody = JSON.parse(req.body.comment);
         const content   = commentBody.content;
         const postId    = commentBody.postId;
         const dateAdd   = Date.now();
@@ -24,7 +24,7 @@ exports.createComment = (req, res, next) => {
             dateAdd: dateAdd
         }
 
-        if ( content == null || postId == null ) {
+        if ( content == null) {
             return res.status(400).json({ error:'invalid parameter'});
         }
 

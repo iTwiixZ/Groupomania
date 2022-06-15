@@ -32,8 +32,8 @@ exports.signup = (req, res, next) => {
         const newUser = models.Users.create({
           name: name,
           email: email,
+          password: hash,
           isAdmin: 0,
-          password: hash
         })
         .then  (user   => res.status (201).json ({message: 'Votre compte a bien été créé !'}))
         .catch (error  =>  res.status (400).json ({error: 'Erreur '}));
