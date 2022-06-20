@@ -107,7 +107,7 @@ export default {
       
       name:   this.$localStorage.get('user'),
       userId: this.$localStorage.get('userId'),
-      isAdmin:this.$localStorage.get('isAdmin'),
+      isAdmin: JSON.parse(this.$localStorage.get('isAdmin')),
       token:  this.$localStorage.get('token'),
       posts:[],
       title:'',
@@ -123,7 +123,7 @@ export default {
   mounted() {
     if (localStorage.name) {
       this.name = localStorage.name;
-      // this.token = localStorage.token;
+      this.token = localStorage.token;
     }
     console.log('administrateur: ' + this.isAdmin);
     // posts

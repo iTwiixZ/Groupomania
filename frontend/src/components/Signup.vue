@@ -4,14 +4,18 @@
         <h1 class="text-center">Ne perds pas de temps et viens nous rejoindres ! </h1>
         <form>
         <div class="form-group ">
-          <input class="form-control" v-model='name' type='name' placeholder="Nom d'utilisateur" size="50" required >
+          <input class="form-control" v-model='name' type='name' placeholder="Nom d'utilisateur: entre 3 et 15 caractères" size="50" required >
+          
         </div>
         <div class="form-group ">
           <input class="form-control" v-model='email' type='email' placeholder="Email" size="50" required aria-label="Email de connection">
         </div>
-        <div class="form-group ">
+        <div class="form-group align-items-center">
           <input class="form-control" v-model='password' type='password' placeholder="Mot de passe" size="50" required>
-        </div>
+         </div>
+          <span class="form-text">
+            Doit contenir 8 caractères minimum, une majuscule et une minuscule.
+       </span>
       </form>  
       <router-link to="/">
         <button @click="signup()" type="submit" class="btn btn-secondary mt-2" id="login" aria-label="S'inscrire" formaction="" formenctype="application/x-www-form-urlencoded">S'inscrire</button>
@@ -61,17 +65,22 @@ export default {
       .then((value) => {
         const userId = JSON.stringify(value.userId);
         localStorage.setItem("userId", userId);
-        this.$swal('Félicitation',
-                'Vous pouvez maintenant vous connecter !',
-                'success');
+        this.$swal({
+          icon: 'success',
+          title: 'Votre compte à été créer avec succès',
+          showConfirmButton: false,
+          timer: 2500
+                  });
   
         
       })
       .catch()
-        this.$swal('Erreur',
-          `Le mot de passe doit comporter au moins 4 caractères, pas plus de 8 caractères et doit inclure au moins une lettre majuscule, une lettre minuscule et un chiffre. L'Email doit être valide et le nom ne doit pas dépasser 12 caractères`,
-          "error"
-        );
+         this.$swal({
+          icon: 'error',
+          title: 'Mauvaise manipultation de votre part !',
+          showConfirmButton: false,
+          timer: 1800
+          });
       }
   }
 }

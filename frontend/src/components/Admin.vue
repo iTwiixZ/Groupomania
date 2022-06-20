@@ -82,17 +82,17 @@ export default {
       isUser:    false,
       name:      this.$localStorage.get('user'),
       userId:    this.$localStorage.get('userId'),
-      isAdmin:   this.$localStorage.get('isAdmin'),
-           
-           posts:[],
-           title:'',
-           content:'',
-           dateAdd:'',
-           id:'',
-           media:'',
-           post:'',
-           comments:[],
-           user:[],
+      token:     this.$localStorage.get('token'),
+      isAdmin:   JSON.parse(this.$localStorage.get('isAdmin')),
+      posts:[],
+      title:'',
+      content:'',
+      dateAdd:'',
+      id:'',
+      media:'',
+      post:'',
+      comments:[],
+      user:[],
       
       
     }
@@ -104,12 +104,19 @@ export default {
       this.token = localStorage.token;
     }
     // posts
-    axios.get('http://localhost:3000/api/posts/getAll') 
-      .then(res => { 
+    axios.get('http://localhost:3000/api/posts/getAll', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + this.token
+          }
+        }) 
+        .then(res => { 
         console.log(res.data)
         this.posts = res.data
         })
       .catch(error => console.log(error));
+      
 
       // Utilisateurs
        axios.get('http://localhost:3000/api/users/')
