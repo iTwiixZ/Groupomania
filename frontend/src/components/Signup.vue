@@ -55,9 +55,9 @@ export default {
         return response.json()
         }else {
         return response.text()
-        .then((text) => {
-        throw new Error(text)}
-          )
+        // .then((text) => {
+        // throw new Error(text)}
+          // )
         }
       })  
         .then((value) => {
@@ -70,16 +70,14 @@ export default {
         timer: 2500
         });
        })
-      .catch()
-      this.$swal({
-      icon: 'error',
-      title: 'Le formulaire est pas correctement remplis !',
-      showConfirmButton: false,
-      timer: 1800
-      });
+      // .catch()
+      // this.$swal({
+      // icon: 'error',
+      // title: 'Le formulaire est pas correctement remplis !',
+      // showConfirmButton: false,
+      // timer: 1800
+      // });
       }
   }
 }
-  
-  
 </script>

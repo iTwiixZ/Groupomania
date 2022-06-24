@@ -34,9 +34,11 @@ exports.signup = (req, res, next) => {
           email: email,
           password: hash,
           isAdmin: 0,
+          
         })
-        .then  (user   => res.status (201).json ({message: 'Votre compte a bien été créé !'}))
-        .catch (error  =>  res.status (400).json ({error: 'Erreur '}));
+        res.status (201).json ({message: 'Votre compte a bien été créé !'})
+        // .then  (user   => res.status (201).json ({message: 'Votre compte a bien été créé !'}))
+        // .catch (error  =>  res.status (400).json ({error: 'Erreur '}));
       })
       .catch(error =>  res.status(500).json({error: 'Une erreur est survenue'}));
       } else{

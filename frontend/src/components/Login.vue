@@ -53,7 +53,8 @@ export default {
       'Content-type': 'application/json',
       'Authorization': `Bearer ${token}`
         }
-        }).then((response) => {
+        }).
+        then((response) => {
           localStorage.setItem("token",response.data.token);
           localStorage.setItem("userId", response.data.userId);
           localStorage.setItem("name", response.data.name);
