@@ -4,6 +4,10 @@
         margin-top: 10vh;
     }
 
+    #btn{
+        display: none;
+    }
+
     #login{
         font-family: monospace;
         background: #F44141;
@@ -159,6 +163,42 @@
         width: 110%;
         height: 15%;
     }
+
+    #btn{
+        display: none;
+    }
+    .btn_show{
+       
+        border: 0;
+        border-radius:15px;
+        color: white;
+        font-size: 12px;
+        height: 30px;
+        width: 130px;
+        background-color: #F44141;
+      
+    } 
+    
+
+    .btn_delete_post{
+       
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        font-size: 12px;
+        height: 30px;
+        width: 100px;
+        background-color: #F44141;
+     }
+    .delete_comment{
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        font-size: 13px;
+        height: 40px;
+        width: 180px;
+        background-color: #F44141;
+    }
     .list_post{
         border: 0;
         border-radius:15px ;
@@ -180,6 +220,38 @@
         width: 165px;
         overflow: hidden;
         background-color: #F44141;
+    }
+
+    #btn{
+        display: none;
+    }
+
+    #btn_post_comment{
+       
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        
+        height: 40px;
+        width: 175px;
+        background-color: #F44141;
+     }
+
+     #btn_post{
+        
+        border: 0;
+        font-family: monospace;
+        border-radius:15px ;
+        color: white;
+        height: 45px;
+        width: 110px;
+        background-color: #F44141;
+      
+    }
+    #img_post{
+        width: 70%;
+        height: 20%;
+        
     }
   }
 

@@ -14,7 +14,7 @@ const validate = [
     .isLength({min: 8})
     .withMessage('Le mot de passe doit contenir au moins 8 caractères'),
     check('password')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#/\$%\^&\*])(?=.{8,})/)
     .withMessage('Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractères spéciale(ex: !, @, #, etc.)')
 
 ]

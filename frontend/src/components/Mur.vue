@@ -46,10 +46,9 @@
         <button v-on:click='newPost()' type="button" id="btn_post">Envoyer</button>
         </form>
     </div>
-    <!-- <div id="scroll_to_top">
-<a href="#top"><button class="btn_top" type="button">Ecrire un post</button></a>
-
-</div> -->
+  <div id="btn" @click="scrollToTop()" >
+    <img class="arrow_up" src="../assets/up-arrow-svgrepo-com.svg" alt="Fleche">
+  </div>
 <div class='container mt-3' id='post'>
       <h2 class="text-center">Voici les dernières acutalités de votre communauté</h2>
       <!-- les posts -->
@@ -348,7 +347,17 @@ export default {
          }
       },
    
-     
+      scrollToTop: function () {
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior:'smooth'
+          })
+        })
+      },
+
   }
  
     
