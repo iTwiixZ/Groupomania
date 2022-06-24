@@ -31,52 +31,50 @@ export default {
   },
   
   data() {
-      return {
-          email:'',
-          password:'',
-          userId:'',
-          isAdmin:'',
-          name:'',
-      }
+  return {
+  email:'',
+  password:'',
+  userId:'',
+  isAdmin:'',
+  name:'',
+  }
   },
   methods: {
-    
-      login : function () {
-          let token = localStorage.getItem('data');
-              axios.post('http://localhost:3000/api/users/login', {
-                  email: this.email,
-                  password: this.password,
-                  name: this.name,
-                  isAdmin: this.isAdmin,
-              },
-              {
-                  headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                  }
-              }).then((response) => {
-                  localStorage.setItem("token",response.data.token);
-                  localStorage.setItem("userId", response.data.userId);
-                  localStorage.setItem("name", response.data.name);
-                  localStorage.setItem("isAdmin",response.data.isAdmin);
-                   this.$swal({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Vous êtes maintenant connecté !',
-                    showConfirmButton: false,
-                    timer: 1800
-                  });
-                  this.$router.push('/forum')
-                })
-                .catch()
-                  this.$swal({
-                  icon: 'error',
-                  title: 'Mot de passe ou email incorrect !',
-                  showConfirmButton: false,
-                  timer: 2800
+    login : function () {
+      let token = localStorage.getItem('data');
+      axios.post('http://localhost:3000/api/users/login', {
+      email: this.email,
+      password: this.password,
+      name: this.name,
+      isAdmin: this.isAdmin,
+      },
+    {
+      headers: {
+      'Content-type': 'application/json',
+      'Authorization': `Bearer ${token}`
+        }
+        }).then((response) => {
+          localStorage.setItem("token",response.data.token);
+          localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("name", response.data.name);
+          localStorage.setItem("isAdmin",response.data.isAdmin);
+          this.$swal({
+            position: 'top-center',
+            icon: 'success',
+            title: 'Vous êtes maintenant connecté !',
+            showConfirmButton: false,
+            timer: 1800
+            });
+            this.$router.push('/forum')
+            })
+            .catch()
+            this.$swal({
+            icon: 'error',
+            title: 'Mot de passe ou email incorrect !',
+            showConfirmButton: false,
+            timer: 2800
           });
-                
-            }
+          }
   }
 }
 </script>

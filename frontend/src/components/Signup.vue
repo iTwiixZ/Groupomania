@@ -37,49 +37,46 @@ export default {
   },
   methods: {
     signup() {
-        const data = {
-              name: this.name,
-              email: this.email,
-              password: this.password
-          };
-          fetch("http://localhost:3000/api/users/signup", {
-              method: "POST",
-              headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-          })
-           .then( response => {
+      const data = {
+      name: this.name,
+      email: this.email,
+      password: this.password
+      };
+      fetch("http://localhost:3000/api/users/signup", {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+      })
+        .then( response => {
         if(response.ok) {
-          return response.json()
-        } else {
-          return response.text()
-          .then((text) => {
-            throw new Error(text)}
+        return response.json()
+        }else {
+        return response.text()
+        .then((text) => {
+        throw new Error(text)}
           )
         }
       })  
-        
-      .then((value) => {
+        .then((value) => {
         const userId = JSON.stringify(value.userId);
         localStorage.setItem("userId", userId);
         this.$swal({
-          icon: 'success',
-          title: 'Votre compte à été créer avec succès',
-          showConfirmButton: false,
-          timer: 2500
-                  });
-  
-        
-      })
+        icon: 'success',
+        title: 'Votre compte à été créer avec succès',
+        showConfirmButton: false,
+        timer: 2500
+        });
+       })
       .catch()
-         this.$swal({
-          icon: 'error',
-          title: 'Mauvaise manipultation de votre part !',
-          showConfirmButton: false,
-          timer: 1800
-          });
+      this.$swal({
+      icon: 'error',
+      title: 'Le formulaire est pas correctement remplis !',
+      showConfirmButton: false,
+      timer: 1800
+      });
       }
   }
 }

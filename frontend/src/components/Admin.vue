@@ -75,7 +75,6 @@ export default {
   
   
   data() {
-    
     return {
       isDisplay: false,
       isUser:    false,
@@ -92,9 +91,7 @@ export default {
       post:'',
       comments:[],
       user:[],
-      
-      
-    }
+      }
     
   },
   mounted() {
@@ -104,10 +101,10 @@ export default {
     }
     // posts
     axios.get('http://localhost:3000/api/posts/getAll', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + this.token
+      headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.token
           }
         }) 
         .then(res => { 
@@ -120,108 +117,78 @@ export default {
       // Utilisateurs
        axios.get('http://localhost:3000/api/users/')
        .then(res => {
-         console.log(res.data)
-         this.users = res.data
+       console.log(res.data)
+       this.users = res.data
        })
-        .catch(error => console.log(error));
+       .catch(error => console.log(error));
   },
-
- 
-  
-
-  created() {
+    created() {
      
   },
   watch: {
     username(newName) {
       localStorage.name = newName;
       }
-    
-  },
+    },
   methods: {
     show: function () {
       this.isDisplay = true;
     },
-   
-   
-  hide: function () {
+    hide: function () {
       this.isDisplay = false;
     },
-
-   showUser: function () {
+    showUser: function () {
       this.isUser = true;
     },
-   
-   
-  hideUser: function () {
+    hideUser: function () {
       this.isUser = false;
     },
-   
-  
-
-
-
-    
-    // supprimer un compte utilisateur pour l'admin
+   // supprimer un compte utilisateur pour l'admin
     deleteCount: function (userId) {
       axios.delete(`http://localhost:3000/api/users/${userId}`,
       {
-          headers: {
-            'content-type': 'application/json',
-            'Authorization': 'Bearer ' + this.token
+        headers: {
+        'content-type': 'application/json',
+        'Authorization': 'Bearer ' + this.token
           }
         })
         .then(() =>{
-          this.$swal({
-                   position: 'top-center',
-                   icon: 'success',
-                   title: `L'utilisateur à bien été supprimer !`,
-                   showConfirmButton: false,
-                   timer: 2200
-                 });
-          
+        this.$swal({
+        position: 'top-center',
+        icon: 'success',
+        title: `L'utilisateur à bien été supprimer !`,
+        showConfirmButton: false,
+        timer: 2200
+        });
           window.setTimeout(function(){location.reload()},2500);
         })
         .catch(error => console.log(error))
     },
-
-
-
-
-    // supprimer un post
+  // supprimer un post
     deletePost: function (id) {
-          let token =localStorage.getItem('token');
-          axios.delete(`http://localhost:3000/api/posts/${id}`,
-          {
-          headers: {
-            'content-type': 'application/json',
-            "Accept": "application/json",
-            'Authorization': 'Bearer ' + token
+      let token =localStorage.getItem('token');
+      axios.delete(`http://localhost:3000/api/posts/${id}`,
+      {
+        headers: {
+        'content-type': 'application/json',
+        "Accept": "application/json",
+        'Authorization': 'Bearer ' + token
           }
-        } )
-          .then(response => {
-              console.log(response.data)
-                this.$swal({
-                   position: 'top-center',
-                   icon: 'success',
-                   title: `Le post a bien été supprimer !`,
-                   showConfirmButton: false,
-                   timer: 2200
+        })
+        .then(response => {
+        console.log(response.data)
+        this.$swal({
+        position: 'top-center',
+        icon: 'success',
+        title: `Le post a bien été supprimer !`,
+        showConfirmButton: false,
+        timer: 2200
                  });
-          
-          window.setTimeout(function(){location.reload()},2500);
+        window.setTimeout(function(){location.reload()},2500);
             })
             .catch(error => console.log(error));
     },
     
   }
- 
-    
- 
-
-}
-
-
-  
-
+ }
 </script>

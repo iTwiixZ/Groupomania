@@ -103,20 +103,19 @@ export default {
   data() {
     
     return {
-      
-      name:   this.$localStorage.get('user'),
-      userId: this.$localStorage.get('userId'),
-      isAdmin: JSON.parse(this.$localStorage.get('isAdmin')),
-      token:  this.$localStorage.get('token'),
-      posts:[],
-      title:'',
-      content:'',
-      createdAt:'',
-      id:'',
-      media:'',
-      post:'',
-      comments:[]
-      }
+    name:   this.$localStorage.get('user'),
+    userId: this.$localStorage.get('userId'),
+    isAdmin: JSON.parse(this.$localStorage.get('isAdmin')),
+    token:  this.$localStorage.get('token'),
+    posts:[],
+    title:'',
+    content:'',
+    createdAt:'',
+    id:'',
+    media:'',
+    post:'',
+    comments:[]
+    }
       },
 
   mounted() {
@@ -124,19 +123,18 @@ export default {
       this.name = localStorage.name;
       this.token = localStorage.token;
     }
-    console.log('administrateur: ' + this.isAdmin);
     // posts
     axios.get('http://localhost:3000/api/posts/getAll', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + this.token
-          }
+      headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + this.token
+        }
         }) 
       .then(res => { 
-        console.log(res.data)
-        this.posts = res.data
-        })
+      console.log(res.data)
+      this.posts = res.data
+      })
       .catch(error => console.log(error));
     },
 
@@ -147,8 +145,7 @@ export default {
     username(newName) {
       localStorage.name = newName;
       }
-    
-  },
+    },
   methods: {
    // déconnexion
     logout: function () {
@@ -162,68 +159,66 @@ export default {
     deleteCount: function (userId) {
       axios.delete(`http://localhost:3000/api/users/${userId}`,
       {
-          headers: {
-            'content-type': 'application/json',
-            'Authorization': 'Bearer ' + this.token
+       headers: {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + this.token
           }
         })
         .then(() =>{
           localStorage.clear();
-           this.$swal({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Votre compte a bien été supprimer !',
-                    showConfirmButton: false,
-                    timer: 2300
-                  });
+          this.$swal({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Votre compte a bien été supprimer !',
+          showConfirmButton: false,
+          timer: 2300
+          });
           this.$router.push('/');
         })
         .catch(error => console.log(error))
     },
     // supprimer un post
     deletePost: function (id) {
-          let token =localStorage.getItem('token');
-          axios.delete(`http://localhost:3000/api/posts/${id}`,
-          {
-          headers: {
-            'content-type': 'application/json',
-            "Accept": "application/json",
-            'Authorization': 'Bearer ' + token
+      let token =localStorage.getItem('token');
+      axios.delete(`http://localhost:3000/api/posts/${id}`,
+      {
+        headers: {
+        'content-type': 'application/json',
+          "Accept": "application/json",
+          'Authorization': 'Bearer ' + token
           }
-        } )
-          .then(response => {
-              console.log(response.data)
-                this.$swal({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Votre post a bien été supprimer !',
-                    showConfirmButton: false,
-                    timer: 2200
-                  });
-              window.setTimeout(function(){location.reload()},2500);
-            })
-            .catch(error => console.log(error));
+        })
+        .then(() => {
+        this.$swal({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Votre post a bien été supprimer !',
+        showConfirmButton: false,
+        timer: 2200
+        });
+        window.setTimeout(function(){location.reload()},2500);
+        })
+        .catch(error => console.log(error));
     },
     // supprimer un commentaire
     deleteComment: function (id) {
-          let token =localStorage.getItem('token');
-          axios.delete(`http://localhost:3000/api/comments/delete/${id}`,
-          {
-          headers: {
-            'content-type': 'application/json',
-            "Accept": "application/json",
-            'Authorization': 'Bearer ' + token
-          }})
-          .then(response => {
-              console.log(response.data)
-               this.$swal({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Votre commentaire a bien été supprimer !',
-                    showConfirmButton: false,
-                    timer: 2200
-                  });
-              window.setTimeout(function(){location.reload()},2500);
+      let token =localStorage.getItem('token');
+      axios.delete(`http://localhost:3000/api/comments/delete/${id}`,
+        {
+        headers: {
+        'content-type': 'application/json',
+        "Accept": "application/json",
+        'Authorization': 'Bearer ' + token
+        }})
+          .then(() => {
+          this.$swal({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Votre commentaire a bien été supprimer !',
+          showConfirmButton: false,
+          timer: 2200
+          });
+          window.setTimeout(function(){location.reload()},2500);
             })
             .catch(error => console.log(error));
     },
@@ -240,15 +235,14 @@ export default {
       axios.get(`http://localhost:3000/api/comments/getComments/${postId}`,
          {
           headers: {
-              'content-type': 'application/json',
-              "Accept": "application/json",
-              'Authorization': 'Bearer ' + token
+          'content-type': 'application/json',
+          "Accept": "application/json",
+          'Authorization': 'Bearer ' + token
            }})
             .then(res => { 
-        console.log(res.data)
-        this.comments = res.data
+          this.comments = res.data
         })
-      .catch(error => console.log(error));
+         .catch(error => console.log(error));
         
       
       },
@@ -256,38 +250,34 @@ export default {
     newPost: function () {
         let token =localStorage.getItem('token');
         const post = {
-          title: this.title,
-          content: this.content,
-          media: this.img,
-          userId: this.userId,
+        title: this.title,
+        content: this.content,
+        media: this.img,
+        userId: this.userId,
         }
         var formData = new FormData()
         formData.append('media', this.img);
-        
         formData.append('post', JSON.stringify(post));
         axios.post('http://localhost:3000/api/posts/new',
         formData ,{
-                  headers: {
-                    
-                  'Authorization': 'Bearer ' + token
-                  }
+        headers: {
+        'Authorization': 'Bearer ' + token
+        }
          }
         ).then(() => { 
-                  console.log('post envoyé !')
-                  console.log( post )
-                  this.post ==="";
-                  this.$swal({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Votre post a bien été envoyé !',
-                    showConfirmButton: false,
-                    timer: 2300
-                  });
-                  window.setTimeout(function(){location.reload()},2500);
-                })
-                .catch((error) => {
-                    console.log(error);
-                    console.log("Votre message n'a pas pu etre posté !");
+        this.post ==="";
+        this.$swal({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Votre post a bien été envoyé !',
+        showConfirmButton: false,
+        timer: 2300
+        });
+        window.setTimeout(function(){location.reload()},2500);
+        })
+        .catch((error) => {
+        console.log(error);
+        console.log("Votre message n'a pas pu etre posté !");
                 });
     },
     // Ajouter un commentaire 
@@ -295,66 +285,58 @@ export default {
         let token =localStorage.getItem('token');
         console.log(postId)
         const comment = { 
-          postId: postId,
-          content : this.content,
-          userId : this.userId,
-         
+        postId: postId,
+        content : this.content,
+        userId : this.userId,
         }
         let formData = new FormData();
-        
         formData.append('comment', JSON.stringify(comment));
         console.log(formData);
         axios.post(`http://localhost:3000/api/comments/new`, formData,
         {
           headers: {
-              
-              "Authorization": 'Bearer ' + token
+          "Authorization": 'Bearer ' + token
           }
         })
         .then(() => {
-          console.log('commentaire envoyé' + comment );
-           this.$swal({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Votre commentaire a bien été envoyé !',
-                    showConfirmButton: false,
-                    timer: 2300
-                  });
-                  window.setTimeout(function(){location.reload()},3000);
+        this.$swal({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Votre commentaire a bien été envoyé !',
+        showConfirmButton: false,
+        timer: 2300
+        });
+        window.setTimeout(function(){location.reload()},3000);
         })
         .catch((error) => {
-                    console.log(error);
-                    console.log("Votre message n'a pas pu etre posté !");
-                });
+        console.log(error);
+        console.log("Votre message n'a pas pu etre posté !");
+        });
     },
     uploadFile(e) {
-      
-       this.img = e.target.files[0];
+      this.img = e.target.files[0];
        const file = e.target.files[0];
        if (file) {
-            let reader = new FileReader();
-            reader.addEventListener('load', function(){
-                let preview = document.getElementById('file');
-                preview.setAttribute("src",this.result);
-            })
-            reader.onload = (event) => {
-                this.preview = event.target.result
-                this.media = event.target.result
-            }
-            reader.readAsDataURL(file)
-                     
-                  
-         }
+      let reader = new FileReader();
+        reader.addEventListener('load', function(){
+        let preview = document.getElementById('file');
+        preview.setAttribute("src",this.result);
+        })
+        reader.onload = (event) => {
+        this.preview = event.target.result
+        this.media = event.target.result
+        }
+       reader.readAsDataURL(file)
+       }
       },
-   
-      scrollToTop: function () {
+        scrollToTop: function () {
         const btn = document.getElementById('btn');
         btn.addEventListener('click', () => {
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior:'smooth'
-          })
+        window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior:'smooth'
+        })
         })
       },
 
