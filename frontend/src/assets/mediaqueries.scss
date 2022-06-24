@@ -122,5 +122,64 @@
         height: 20%;
         
     }
+   
+
+   
+    .list_post{
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        font-size: 13px;
+        height: 45px;
+        width: 165px;
+        background-color: #F44141;
+        overflow: hidden;
+    }
+
+    .list_user{
+        
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        font-size: 13px;
+        height: 45px;
+        width: 165px;
+        overflow: hidden;
+        background-color: #F44141;
+    }
+
+    .img_posted_admin{
+        width: 110%;
+        height: 15%;
+    }
+  }
+
+  @media (min-width: 425px) and (max-width: 768px){
+    .img_posted_admin{
+        width: 110%;
+        height: 15%;
+    }
+    .list_post{
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        font-size: 13px;
+        height: 45px;
+        width: 165px;
+        background-color: #F44141;
+        overflow: hidden;
+    }
+
+    .list_user{
+        
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        font-size: 13px;
+        height: 45px;
+        width: 165px;
+        overflow: hidden;
+        background-color: #F44141;
+    }
   }
 

@@ -1,14 +1,14 @@
 <template>
   <div v-if="isAdmin == true">
     <h1 class="text-center mt-5">Bienvenue dans votre interface administrateur {{name}}</h1>
-    <p class="text-center mt-3">Vous pouvez supprimez les post non conformes et supprimer les utilisateurs</p>
+    <p class="text-center mt-5">Vous pouvez supprimez les post non conformes et supprimer les utilisateurs</p>
    <div class="post d-flex justify-content-center">
-            <button class="list_post" v-on:click="show" >Afficher les post</button>
+            <button class="list_post mt-5" v-on:click="show" >Afficher les post</button>
            <div id="post_list" v-if="isDisplay" class="container">
             <button class="list_post" v-on:click="hide">Cacher les post</button>
-            <div class="table_style container">
+            <div class="table_style table-responsive">
            <table class="table table-bordered mt-2" v-for="post in posts" :key="post.id">
-             <thead>
+             <thead class="">
                <tr>
                  <th scope="col">Post id</th>
                  <th scope="col">Titre</th>
@@ -35,7 +35,7 @@
             <button class="list_user" v-on:click="showUser">Afficher les utilisateurs</button>
                <div id="user_list" v-if="isUser" class="container">
             <button class="list_user" v-on:click="hideUser">Cacher les utilisateurs</button>
-            <div class="table_style container">
+            <div class="table_style table-responsive table-responsive-lg">
            <table class="table table-bordered mt-2" v-for="user in users" :key="user.id">
              <thead>
                <tr>
@@ -49,9 +49,7 @@
                  <td class="user_width">{{user.name}}</td>
                  <td class="email_width">{{user.email}}</td>
                  <td>{{user.id}}</td>
-                 
-                  
-                 <td class="text-center"><button class="text-center" v-if="post.userId == userId || isAdmin == true" v-on:click.prevent='deleteCount(user.id)' type="button" id='delete_btn_admin' >Supprimer l'utilisateur</button></td>
+                 <td class="text-center"><button class="text-center" v-if="post.userId == userId || isAdmin == true" v-on:click.prevent='deleteCount(user.id)' type="button" id='delete_btn_admin' >Supprimer</button></td>
                </tr>
              </tbody>
            </table>
@@ -68,6 +66,7 @@ import axios from 'axios'
 import '../assets/btn.scss'
 import '../assets/fleche.scss'
 import '../assets/mur.scss'
+import '../assets/mediaqueries.scss'
 export default {
   name:'admin',
   img:'',
