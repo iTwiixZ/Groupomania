@@ -1,14 +1,14 @@
 <template>
     <div class="mt-4 container d-flex justify-content-center flex-column">
-      <form class="container d-flex justify-content-center">
-          <div class="form-group">
+      <form class="container d-flex justify-content-center form_ctrl">
+          <div  class="form-group">
             <input class="form-control" v-model='email' type='email' placeholder="Email" size="50" required aria-label="Email de connection">
             <input class="form-control" v-model='password' type='password' placeholder="Mot de passe" size="50" required> 
           </div>
           
       </form> 
-            <div class="container mt-4">
-            <div class="container d-flex justify-content-center ">
+            <div class="container  mt-4">
+            <div class="container  d-flex justify-content-center gap-5">
           <router-link to="/mur">
           <button  v-on:click.prevent='login()' type="button"  id='login'>Se connecter</button>
           </router-link>
@@ -23,6 +23,7 @@
 <script>
 import axios from 'axios'
 import '../assets/btn.scss'
+import '../assets/mediaqueries.scss'
 export default {
   
   name: 'login',
@@ -66,7 +67,15 @@ export default {
                     timer: 1800
                   });
                   this.$router.push('/forum')
-                });
+                })
+                .catch()
+                  this.$swal({
+                  icon: 'error',
+                  title: 'Mot de passe ou email incorrect !',
+                  showConfirmButton: false,
+                  timer: 2800
+          });
+                
             }
   }
 }

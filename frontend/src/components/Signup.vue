@@ -14,8 +14,8 @@
           <input class="form-control" v-model='password' type='password' placeholder="Mot de passe" size="50" required>
          </div>
           <span class="form-text">
-            Doit contenir 8 caractères minimum, une majuscule et une minuscule.
-       </span>
+            Doit contenir 8 caractères minimum, une majuscule, une minuscule et un caractère spéciale (ex: !, @, #, etc.)
+        </span>
       </form>  
       <router-link to="/">
         <button @click="signup()" type="submit" class="btn btn-secondary mt-2" id="login" aria-label="S'inscrire" formaction="" formenctype="application/x-www-form-urlencoded">S'inscrire</button>

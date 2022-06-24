@@ -1,10 +1,10 @@
 <template>
     <div class="container">
       <div class="container">
-        <div class="container d-flex justify-content-center">
+        <div class="container d-flex justify-content-center mt-3">
         <img class="img_logo" src="../assets/icon-above-font.svg" alt="Groupomania">
         </div>
-        <h2 class="text-center">Bienvenue sur le réseau social de votre entreprise préférée.</h2>
+        <h2 class="text-center mt-3">Bienvenue sur le réseau social de votre entreprise préférée.</h2>
         </div>
     </div>
 </template>

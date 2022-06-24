@@ -48,6 +48,7 @@
     </div>
     <div id="scroll_to_top">
 <a href="#top"><button class="btn_top" type="button">Ecrire un post</button></a>
+
 </div>
 <div class='container mt-3' id='post'>
       <h2 class="text-center">Voici les dernières acutalités de votre communauté</h2>
