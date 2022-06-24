@@ -16,6 +16,111 @@
         
         
     }
+
+    #logout_btn{
+        border: 0;
+        font-family: monospace;
+        font-size: 11.5px;
+        border-radius:15px ;
+        color: white;
+        height: 45px;
+        width: 80px;
+        margin-top: 15px;
+        background-color: #F44141;
     
+    }
+
+    #admin_btn{
+        
+        border: 0;
+        font-family: monospace;
+        border-radius:15px ;
+        color: white;
+        font-size: 12.8px;
+        height: 45px;
+        width: 105.5px;
+        margin-top: 15px;
+        background-color: #F44141;
+    }
+    
+    #delete_btn{
+        
+        height: 45px;
+        width: 80px;
+        border: 0;
+        border-radius: 15px;
+        color: white;
+        margin-top: 15px;
+        font-family: monospace;
+        font-size: 11.5px;
+        background-color: #F44141;
+        
+    }
+
+    .btn_delete_post{
+       
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        font-size: 12px;
+        height: 30px;
+        width: 100px;
+        background-color: #F44141;
+     }
+
+     .btn_show{
+       
+        border: 0;
+        border-radius:15px;
+        color: white;
+        font-size: 12px;
+        height: 30px;
+        width: 130px;
+        background-color: #F44141;
+      
+    } 
+
+    #btn_post_comment{
+       
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        
+        height: 40px;
+        width: 175px;
+        background-color: #F44141;
+     }
+
+     #btn_post{
+        
+        border: 0;
+        font-family: monospace;
+        border-radius:15px ;
+        color: white;
+        height: 45px;
+        width: 110px;
+        background-color: #F44141;
+      
+    }
+
+    .img_posted{
+        width: 100%;
+        height: 50%;
+    }
+
+    .delete_comment{
+        border: 0;
+        border-radius:15px ;
+        color: white;
+        font-size: 13px;
+        height: 40px;
+        width: 180px;
+        background-color: #F44141;
+    }
+    #img_post{
+        width: 70%;
+        height: 20%;
+        
+    }
   }
 

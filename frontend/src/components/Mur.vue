@@ -5,7 +5,7 @@
            
             
             
-          <div class="container d-flex justify-content-end">
+          <div class=" gap-1 d-flex justify-content-center">
             <!-- Bouton admin -->
             <router-link v-if="isAdmin == true" to="/admin">
               <button id="admin_btn" v-if="isAdmin == true"  type="button">Administration</button>
@@ -46,17 +46,16 @@
         <button v-on:click='newPost()' type="button" id="btn_post">Envoyer</button>
         </form>
     </div>
-    <div id="scroll_to_top">
+    <!-- <div id="scroll_to_top">
 <a href="#top"><button class="btn_top" type="button">Ecrire un post</button></a>
 
-</div>
+</div> -->
 <div class='container mt-3' id='post'>
       <h2 class="text-center">Voici les dernières acutalités de votre communauté</h2>
       <!-- les posts -->
       <div class="row">
         <div id="post-div" class="col-sm-12 mb-3 post_div" v-for="post in posts" :key="post.id">
           <h3 class="pt-3 mb-0">{{ post.title }}</h3>
-          <small class="text-start pe-0 text-secondary" >publié par <span class="fw-bold">{{ post.userId }}</span></small>
           <p class="pt-3 h5 mb-1">{{ post.content }}</p>
           <p>Publié le {{post.createdAt}}</p>
           <div class="form-group">
