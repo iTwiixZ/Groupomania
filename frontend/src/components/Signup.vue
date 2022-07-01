@@ -25,6 +25,9 @@
 <script>
 
 import '../assets/btn.scss'
+import Swal from 'sweetalert2'
+import router from '../router'
+import axios from 'axios'
 export default {
   name: 'signup',
   
@@ -42,8 +45,7 @@ export default {
       email: this.email,
       password: this.password
       };
-      fetch("http://localhost:3000/api/users/signup", {
-      method: "POST",
+      axios.post("http://localhost:3000/api/users/signup", {
       headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -60,24 +62,37 @@ export default {
           // )
         }
       })  
-        .then((value) => {
+        .then(function (value) {
         const userId = JSON.stringify(value.userId);
         localStorage.setItem("userId", userId);
-        this.$swal({
+        Swal.fire({
         icon: 'success',
         title: 'Votre compte à été créer avec succès',
         showConfirmButton: false,
-        timer: 2500
-        });
+        timer: 2500,
+        timerProgressBar: true,
+        willClose: () => {router.push('/')}
+        })
        })
-      // .catch()
-      // this.$swal({
-      // icon: 'error',
-      // title: 'Le formulaire est pas correctement remplis !',
-      // showConfirmButton: false,
-      // timer: 1800
-      // });
+      .catch(function(error) {
+        const codeError  = error.message.split("code")[1]
+        let messageError = ""
+        switch(codeError) {
+          case '400' : messageError = "Formulaire incomplet ou mal remplis"; break
+        }
+        Swal.fire({
+      icon: 'error',
+      title: 'Le formulaire est pas correctement remplis !',
+      text : messageError || error.message,
+      showConfirmButton: false,
+      timer: 3500,
+      timerProgressBar: true
+
+      })
+      })
+    
       }
+
   }
 }
 </script>

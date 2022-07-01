@@ -94,6 +94,8 @@ import axios from 'axios'
 import '../assets/btn.scss'
 import '../assets/fleche.scss'
 import '../assets/mur.scss'
+import Swal from 'sweetalert2'
+
 export default {
   name:'mur',
   img:'',
@@ -189,7 +191,7 @@ export default {
           }
         })
         .then(() => {
-        this.$swal({
+        Swal.fire({
         position: 'top-center',
         icon: 'success',
         title: 'Votre post a bien été supprimer !',
@@ -211,7 +213,7 @@ export default {
         'Authorization': 'Bearer ' + token
         }})
           .then(() => {
-          this.$swal({
+          Swal.fire({
           position: 'top-center',
           icon: 'success',
           title: 'Votre commentaire a bien été supprimer !',
@@ -266,7 +268,7 @@ export default {
          }
         ).then(() => { 
         this.post ==="";
-        this.$swal({
+        Swal.fire({
         position: 'top-center',
         icon: 'success',
         title: 'Votre post a bien été envoyé !',
@@ -299,7 +301,7 @@ export default {
           }
         })
         .then(() => {
-        this.$swal({
+        Swal.fire({
         position: 'top-center',
         icon: 'success',
         title: 'Votre commentaire a bien été envoyé !',

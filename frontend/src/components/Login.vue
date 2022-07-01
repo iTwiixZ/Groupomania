@@ -24,6 +24,8 @@
 import axios from 'axios'
 import '../assets/btn.scss'
 import '../assets/mediaqueries.scss'
+import Swal from 'sweetalert2'
+import router from '../router' 
 export default {
   
   name: 'login',
@@ -54,27 +56,40 @@ export default {
       'Authorization': `Bearer ${token}`
         }
         }).
-        then((response) => {
+        then(function(response){
           localStorage.setItem("token",response.data.token);
           localStorage.setItem("userId", response.data.userId);
           localStorage.setItem("name", response.data.name);
           localStorage.setItem("isAdmin",response.data.isAdmin);
-          this.$swal({
-            position: 'top-center',
-            icon: 'success',
-            title: 'Vous êtes maintenant connecté !',
-            showConfirmButton: false,
-            timer: 1800
-            });
-            this.$router.push('/forum')
+          Swal.fire({
+           icon: 'success',
+           title: 'Vous êtes maintenant connecté !',
+           footer: "Redirection en cours...",
+           showConfirmButton: false,
+           timerProgressBar: true,
+           timer: 2000,
+           willClose: () =>  {router.push('/forum')}
             })
-            .catch()
-            this.$swal({
-            icon: 'error',
-            title: 'Mot de passe ou email incorrect !',
-            showConfirmButton: false,
-            timer: 2800
-          });
+            
+            })
+            .catch(function(error) {
+              const codeError  = error.message.split("code")[1]
+              let messageError = ""
+              switch(codeError){
+                case '401': messageError = "Mot de passe faux !"; break
+                case '404': messageError = "Compte introuvable !"; break
+              }
+                  Swal.fire({
+                  icon: 'error',
+                  title: "Une erreur est survenue",
+                  text: messageError || error.message,
+                  showConfirmButton: false,
+                  timer: 3500,
+                  timerProgressBar: true
+              })
+            })
+
+        
           }
   }
 }
