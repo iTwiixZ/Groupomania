@@ -83,6 +83,8 @@ export default {
           localStorage.setItem("isAdmin", response.data.isAdmin);
           Swal.fire({
             icon: "success",
+            toast: true,
+            position: "top-end",
             title: "Vous êtes maintenant connecté !",
             footer: "Redirection en cours...",
             showConfirmButton: false,

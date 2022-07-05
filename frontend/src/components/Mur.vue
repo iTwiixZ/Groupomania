@@ -113,7 +113,7 @@
             <img
               :src="'http://localhost:3000/images/' + post.media"
               class="img_posted mb-2"
-              alt="image du post "
+              alt="image du post"
             />
           </div>
           <!--  supprimer le post -->
@@ -231,7 +231,6 @@ export default {
         },
       })
       .then((res) => {
-        console.log(res.data);
         this.posts = res.data;
       })
       .catch((error) => console.log(error));
@@ -264,8 +263,9 @@ export default {
         })
         .then(() => {
           localStorage.clear();
-          this.$swal({
-            position: "top-center",
+          Swal.fire({
+            toast: true,
+            position: "top-end",
             icon: "success",
             title: "Votre compte a bien été supprimer !",
             showConfirmButton: false,
@@ -288,7 +288,8 @@ export default {
         })
         .then(() => {
           Swal.fire({
-            position: "top-center",
+            toast: true,
+            position: "top-end",
             icon: "success",
             title: "Votre post a bien été supprimer !",
             showConfirmButton: false,
@@ -313,7 +314,8 @@ export default {
         })
         .then(() => {
           Swal.fire({
-            position: "top-center",
+            toast: true,
+            position: "top-end",
             icon: "success",
             title: "Votre commentaire a bien été supprimer !",
             showConfirmButton: false,
@@ -369,7 +371,8 @@ export default {
         .then(() => {
           this.post === "";
           Swal.fire({
-            position: "top-center",
+            toast: true,
+            position: "top-end",
             icon: "success",
             title: "Votre post a bien été envoyé !",
             showConfirmButton: false,
@@ -404,7 +407,8 @@ export default {
         })
         .then(() => {
           Swal.fire({
-            position: "top-center",
+            toast: true,
+            position: "top-end",
             icon: "success",
             title: "Votre commentaire a bien été envoyé !",
             showConfirmButton: false,

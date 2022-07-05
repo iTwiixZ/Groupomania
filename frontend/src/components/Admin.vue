@@ -114,6 +114,7 @@ import "../assets/btn.scss";
 import "../assets/fleche.scss";
 import "../assets/mur.scss";
 import "../assets/mediaqueries.scss";
+import Swal from "sweetalert2";
 export default {
   name: "admin",
   img: "",
@@ -195,8 +196,9 @@ export default {
           },
         })
         .then(() => {
-          this.$swal({
-            position: "top-center",
+          Swal.fire({
+            toast: true,
+            position: "top-end",
             icon: "success",
             title: `L'utilisateur à bien été supprimer !`,
             showConfirmButton: false,
@@ -221,9 +223,10 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.$swal({
-            position: "top-center",
+          Swal.fire({
             icon: "success",
+            toast: true,
+            position: "top-end",
             title: `Le post a bien été supprimer !`,
             showConfirmButton: false,
             timer: 2200,

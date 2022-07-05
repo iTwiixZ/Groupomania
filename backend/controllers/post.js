@@ -61,12 +61,10 @@ exports.deletePost = (req, res, next) => {
           res.status(200).json({ message: "Post supprimé !" });
         })
         .catch((error) => {
-          res
-            .status(400)
-            .json({
-              error: error,
-              message: "Le post n'a pas pu être supprimé !",
-            });
+          res.status(400).json({
+            error: error,
+            message: "Le post n'a pas pu être supprimé !",
+          });
         });
     })
     .catch((error) => {
