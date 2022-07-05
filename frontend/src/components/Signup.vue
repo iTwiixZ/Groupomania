@@ -64,7 +64,7 @@ export default {
       })  
       
       .catch(function(error) {
-        const codeError  = error.message.split("code")[1]
+        const codeError  = error.message.split("code ")[1]
         let messageError = ""
         switch(codeError) {
           case '400' : messageError = "Formulaire incomplet ou mal remplis"; break
