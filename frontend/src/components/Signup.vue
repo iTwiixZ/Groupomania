@@ -112,15 +112,21 @@ export default {
           let messageError = "";
           switch (codeError) {
             case "400":
-              messageError = "Formulaire incomplet ou mal remplis";
+              messageError = "Tous les champs doivent être remplis";
               break;
             case "404":
               messageError = "Utilisateur deja existant";
               break;
+            case "406":
+              messageError = "Le pseudo doit contenir entre 3 & 15 caractères";
+              break;
+            case "500":
+              messageError = "Erreur serveur";
+              break;
           }
           Swal.fire({
             icon: "error",
-            title: "Le formulaire est pas correctement remplis !",
+            title: "Une erreur est survenue",
             text: messageError || error.message,
             showConfirmButton: false,
             timer: 3500,
