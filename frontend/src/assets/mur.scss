@@ -1,232 +1,225 @@
-#post_form{
-    box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
-    height: 380px;
-    border-radius: 5px;
-    
+#post_form {
+  box-shadow: 2px 4px 13px 2px rgba(0, 0, 0, 0.77);
+  height: 380px;
+  border-radius: 5px;
 }
 
-.arrow_up{
-    width: 50px;
-    
+.arrow_up {
+  width: 50px;
 }
 
-#btn{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    cursor: pointer;
+#btn {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
 }
 
-#img_post{
-    width: 10%;
-    height: 20%;
-    
+#img_post {
+  width: 10%;
+  height: 20%;
 }
 
-#btn_post{
-    cursor: pointer;
-    border: 0;
-    font-family: monospace;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in-out;
-    height: 48px;
-    width: 199px;
-    margin-right: 25px;
-    margin-top: 15px;
-    background-color: #F44141;
-    &:hover{
-        transform: scale(1.050);
-        box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
-        &::after{
-            content:' 📮 ';
-        }
+#btn_post {
+  cursor: pointer;
+  border: 0;
+  font-family: monospace;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in-out;
+  height: 48px;
+  width: 199px;
+  margin-right: 25px;
+  margin-top: 15px;
+  background-color: #f44141;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 2px 4px 13px 2px rgba(0, 0, 0, 0.77);
+    &::after {
+      content: " 📮 ";
     }
+  }
 }
 
-#post{
-    
-    box-shadow: 2px 4px 13px 2px rgba(0,0,0,0.77);
+#post {
+  box-shadow: 2px 4px 13px 2px rgba(0, 0, 0, 0.77);
 }
 
-.img_posted{
-    width: 30%;
-    height: 20%;
+.img_posted {
+  width: 30%;
+  height: 20%;
 }
 
-.img_posted_admin{
-    width: 25%;
-    height: 15%;
+.img_posted_admin {
+  width: 25%;
+  height: 15%;
 }
-.btn_show{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 48px;
-    width: 185px;
-    margin-right: 25px;
-    background-color: #F44141;
-  
-}  
-    
-
-.btn_delete_post{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 48px;
-    width: 185px;
-    margin-right: 25px;
-    background-color: #F44141;
- }
-
- #btn_post_comment{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 48px;
-    width: 185px;
-    background-color: #F44141;
- }
- 
- .btn_top{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 48px;
-    width: 185px;
-    background-color: #F44141;
- }
-    
-.delete_comment{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 48px;
-    width: 200px;
-    margin-left: 10px;
-    background-color: #F44141;
+.btn_show {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 48px;
+  width: 185px;
+  margin-right: 25px;
+  background-color: #f44141;
 }
 
-#scroll_to_top{
-    position: fixed;
-    width: 25px;
-    height: 25px;
-    bottom: 50px;
-    left: 5px;
+.btn_delete_post {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 48px;
+  width: 185px;
+  margin-right: 25px;
+  background-color: #f44141;
 }
 
-.btn_delete_post_admin{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 38px;
-    width: 145px;
-    margin-left: 25px;
-    background-color: #F44141;
+#btn_post_comment {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 48px;
+  width: 185px;
+  background-color: #f44141;
 }
 
-.list_post{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 50px;
-    width: 165px;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    background-color: #F44141;
+.btn_top {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 48px;
+  width: 185px;
+  background-color: #f44141;
 }
 
-.list_comment{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 38px;
-    width: 195px;
-   margin-left: 10px;
-    background-color: #F44141;
+.delete_comment {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 48px;
+  width: 200px;
+  margin-left: 10px;
+  background-color: #f44141;
 }
 
-.table_style{
-    border:solid 2px #F44141;
-    border-radius: 5px;
+#scroll_to_top {
+  position: fixed;
+  width: 25px;
+  height: 25px;
+  bottom: 50px;
+  left: 5px;
 }
 
-.title_width{
-    width: 15%;
-    height: 20%;
-}
-.content_width{
-    width: 25%;
-    height: 50%;
-}
-
-#admin_btn{
-    cursor: pointer;
-    border: 0;
-    font-family: monospace;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in-out;
-    height: 45px;
-    width: auto;
-    margin-right: 25px;
-    margin-top: 15px;
-    background-color: #F44141;
+.btn_delete_post_admin {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 38px;
+  width: 145px;
+  margin-left: 25px;
+  background-color: #f44141;
 }
 
-.list_user{
-    cursor: pointer;
-    border: 0;
-    border-radius:15px ;
-    color: white;
-    transition: all 350ms ease-in;
-    height: 50px;
-    width: 165px;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    background-color: #F44141;
+.list_post {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 50px;
+  width: 165px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  background-color: #f44141;
 }
 
-.user_width{
-    width: 25%;
-    height: 50%;
+.list_comment {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 38px;
+  width: 195px;
+  margin-left: 10px;
+  background-color: #f44141;
 }
 
-.email_width{
-    width: 25%;
-    height: 50%;
-}
-#delete_btn_admin{
-    cursor: pointer;
-    transition: all 450ms ease-in-out;
-    height: 45px;
-    width: auto;
-    border: 0;
-    border-radius: 15px;
-    color: white;
-    background-color: #F44141;
+.table_style {
+  border: solid 2px #f44141;
+  border-radius: 5px;
 }
 
+.title_width {
+  width: 15%;
+  height: 20%;
+}
+.content_width {
+  width: 25%;
+  height: 50%;
+}
+
+#admin_btn {
+  cursor: pointer;
+  border: 0;
+  font-family: monospace;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in-out;
+  height: 45px;
+  width: auto;
+  margin-right: 25px;
+  margin-top: 15px;
+  background-color: #f44141;
+}
+
+.list_user {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  transition: all 350ms ease-in;
+  height: 50px;
+  width: 165px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  background-color: #f44141;
+}
+
+.user_width {
+  width: 25%;
+  height: 50%;
+}
+
+.email_width {
+  width: 25%;
+  height: 50%;
+}
+#delete_btn_admin {
+  cursor: pointer;
+  transition: all 450ms ease-in-out;
+  height: 45px;
+  width: auto;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  background-color: #f44141;
+}

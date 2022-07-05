@@ -26,7 +26,11 @@ const routes = [
     path: '/forum',
     name: 'Forum',
     component: Forum,
+   
   },
+
+
+
   {
     path: '/signup',
     name: 'Signup',
@@ -54,15 +58,16 @@ const router = new VueRouter({
   routes
 })
 
-// Vérification si l'user est connecter pour acceder au forum
 router.beforeEach((to, from, next) => {
-  const token  = localStorage.getItem("token")
-  const logged = localStorage.getItem("userId")
-  if (to.name !== 'Home' && !token && !logged) 
-  next({ name: 'Home' })
-  else next()
+    const publicPages = ["/", "/signup",]
+    const authRequired = !publicPages.includes(to.path)
+    const logged = localStorage.getItem("userId")
+    const token = localStorage.getItem("token")
+    if (authRequired && !logged && !token) {
+        return next("/")
+    }
+    next()
 })
-
 
 export default router
 
