@@ -1,7 +1,13 @@
 <template>
   <div v-if="isAdmin == true">
     <h1 class="text-center mt-5">Bienvenue dans votre interface administrateur {{name}}</h1>
+    <div class="d-flex justify-content-center">
+    <router-link to="/forum">
+    <button class="list_post">Revenir a l'accueil</button>
+    </router-link>
+    </div>
     <p class="text-center mt-5">Vous pouvez supprimez les post non conformes et supprimer les utilisateurs</p>
+    
    <div class="post d-flex justify-content-center">
             <button class="list_post mt-5" v-on:click="show" >Afficher les post</button>
            <div id="post_list" v-if="isDisplay" class="container">

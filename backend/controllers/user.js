@@ -5,10 +5,11 @@ const models   = require('../models');
 // Méthode pour l'inscription de l'utilisateur
 
 exports.signup = (req, res, next) => {
-  
-  const name     = req.body.name;
-  const email    = req.body.email;
-  const password = req.body.password;
+
+  const body     = JSON.parse(req.body.body);
+  const name     = body.name;
+  const email    = body.email;
+  const password = body.password;
 
   // Vérifie que tous les champs sont complets
   if (email == null || email == '' || name == null || name == '' || password == null || password == '') {
@@ -27,7 +28,7 @@ exports.signup = (req, res, next) => {
   })
   .then(userExist => {
     if(!userExist) {
-      bcrypt.hash(req.body.password, 10)
+      bcrypt.hash(body.password, 10)
       .then(hash => {
         const newUser = models.Users.create({
           name: name,
@@ -37,15 +38,14 @@ exports.signup = (req, res, next) => {
           
         })
         res.status (201).json ({message: 'Votre compte a bien été créé !'})
-        // .then  (user   => res.status (201).json ({message: 'Votre compte a bien été créé !'}))
-        // .catch (error  =>  res.status (400).json ({error: 'Erreur '}));
+        
       })
-      .catch(error =>  res.status(500).json({error: 'Une erreur est survenue'}));
+      .catch(error =>  res.status(500).json({error}));
       } else{
-        return res.status(404).json({error:'Cet utilisateur existe déja, desolé !'})
+        return res.status(404).json({error})
       }
   })
-      .catch(error => res.status(500).json({ error: 'Une erreur est survenue' }));
+      .catch(error => res.status(500).json({error}));
 };
 
 // Méthode pour connecter l'utilisateur
@@ -81,7 +81,7 @@ exports.login = (req,res, next) => {
           )
         });
       })
-      .catch(error =>  res.status(500).json({ error: 'Une erreur est survenue' }));
+      .catch(error =>  res.status(500).json({ error}));
     })
       .catch(error => res.status(500).json({error}));
       }catch(error){console.log(error)}

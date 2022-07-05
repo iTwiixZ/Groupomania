@@ -78,14 +78,15 @@ export default {
               switch(codeError){
                 case '401': messageError = "Mot de passe faux !"; break
                 case '404': messageError = "Compte introuvable !"; break
+                case '500': messageError = "Erreur du serveur !"; break
               }
                   Swal.fire({
-                  icon: 'error',
-                  title: "Une erreur est survenue",
-                  text: messageError || error.message,
-                  showConfirmButton: false,
-                  timer: 3500,
-                  timerProgressBar: true
+                    title: "Une erreur est survenue",
+                    text: messageError || error.message,
+                    icon: "error",
+                    timer: 4000,
+                    showConfirmButton: false,
+                    timerProgressBar: true
               })
             })
 

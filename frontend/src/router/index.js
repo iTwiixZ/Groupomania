@@ -55,17 +55,13 @@ const router = new VueRouter({
 })
 
 // Vérification si l'user est connecter pour acceder au forum
-
-// router.beforeEach((to, from, next) =>  {
-//   const publicPages  = ["/", "forum"]
-//   const authRequired = !publicPages.includes(to.path)
-//   const logged       = localStorage.getItem("userId")
-//   const loggedToken  = localStorage.getItem("token")
-//   if(authRequired && !logged && !loggedToken){
-//     return next("/")
-//   }
-//   next()
-//   })
+router.beforeEach((to, from, next) => {
+  const token  = localStorage.getItem("token")
+  const logged = localStorage.getItem("userId")
+  if (to.name !== 'Home' && !token && !logged) 
+  next({ name: 'Home' })
+  else next()
+})
 
 
 export default router

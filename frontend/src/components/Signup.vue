@@ -26,7 +26,6 @@
 
 import '../assets/btn.scss'
 import Swal from 'sweetalert2'
-import router from '../router'
 import axios from 'axios'
 export default {
   name: 'signup',
@@ -54,31 +53,22 @@ export default {
       })
         .then( response => {
         if(response.ok) {
-        return response.json()
-        }else {
-        return response.text()
-        // .then((text) => {
-        // throw new Error(text)}
-          // )
-        }
-      })  
-        .then(function (value) {
-        const userId = JSON.stringify(value.userId);
-        localStorage.setItem("userId", userId);
         Swal.fire({
         icon: 'success',
         title: 'Votre compte à été créer avec succès',
         showConfirmButton: false,
         timer: 2500,
         timerProgressBar: true,
-        willClose: () => {router.push('/')}
-        })
-       })
+          })
+        }
+      })  
+      
       .catch(function(error) {
         const codeError  = error.message.split("code")[1]
         let messageError = ""
         switch(codeError) {
           case '400' : messageError = "Formulaire incomplet ou mal remplis"; break
+          case '404' : messageError = "Utilisateur deja existant"; break
         }
         Swal.fire({
       icon: 'error',
