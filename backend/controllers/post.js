@@ -51,27 +51,32 @@ exports.createPost = (req, res, next) => {
 // Méthode pour supprimé un post
 
 exports.deletePost = (req, res, next) => {
-  models.Post.findOne({
-    where: { id: req.params.id },
-  })
-    .then((post) => {
-      post
-        .destroy()
-        .then(() => {
-          res.status(200).json({ message: "Post supprimé !" });
-        })
-        .catch((error) => {
-          res.status(400).json({
-            error: error,
-            message: "Le post n'a pas pu être supprimé !",
-          });
-        });
+  const post = req.body.post;
+  const userId = decodeUid(req.headers.authorization);
+  const isAdmin = req.body.isAdmin;
+  if (userId === post.userId || isAdmin === true) {
+    models.Post.findOne({
+      where: { id: req.params.id },
     })
-    .catch((error) => {
-      res
-        .status(400)
-        .json({ error: error, message: "Une erreur est survenue" });
-    });
+      .then((post) => {
+        post
+          .destroy()
+          .then(() => {
+            res.status(200).json({ message: "Post supprimé !" });
+          })
+          .catch((error) => {
+            res.status(400).json({
+              error: error,
+              message: "Le post n'a pas pu être supprimé !",
+            });
+          });
+      })
+      .catch((error) => {
+        res
+          .status(400)
+          .json({ error: error, message: "Une erreur est survenue" });
+      });
+  }
 };
 
 // Méthode pour récuperer un post
