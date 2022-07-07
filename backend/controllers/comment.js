@@ -47,29 +47,48 @@ exports.createComment = (req, res, next) => {
 
 // Supprimer un commentaire
 
-exports.deleteComment = (req, res, next) => {
-  const userId = req.body.userId;
-  const allowed = req.body.isAdmin;
-  const token = decodeUid(req.headers.authorization);
+exports.deleteComment = async (req, res, next) => {
+  const user = decodeUid(req.headers.authorization);
   const id = req.params.id;
-  const comment = req.body.comment;
 
-  if (!allowed || userId != comment.userId) {
-    res.status(401).json({ message: "Not authorized" });
+  const userModel = await models.Users.findOne({
+    where: { id: user.id },
+  });
+
+  const comment = await models.Comment.findOne({
+    where: { id: id },
+  });
+
+  if (
+    user.id == comment.getDataValue("userId") ||
+    userModel.getDataValue("isAdmin")
+  ) {
+    models.Comment.findOne({ where: { id: id } })
+      .then((comment) => {
+        comment
+          .destroy()
+          .then(() => {
+            res.status(200).json({ message: "commentaire supprimé !" });
+          })
+          .catch((error) => {
+            res
+              .status(400)
+              .json({
+                error: error,
+                message: "Le commentaire n'a pas pu être supprimé !",
+              });
+          });
+      })
+      .catch((error) => {
+        res.status(500).json({ message: "Something went wrong" });
+      });
+  } else {
+    res.status(403).json({ message: "Not authorized" });
     return;
   }
-
-
-  models.Comment.destroy({ where: { id: id } })
-    .then((res) => {
-      res.status(200).json({ message: "Comment deleted successfully" });
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Something went wrong" });
-    });
 };
 
-// Récupérer tous les commentaires
+  // Récupérer tous les commentaires
 
 exports.getComments = (req, res, next) => {
   models.Comment.findAll({

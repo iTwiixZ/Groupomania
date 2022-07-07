@@ -50,37 +50,46 @@ exports.createPost = (req, res, next) => {
 
 // Méthode pour supprimé un post
 
-exports.deletePost =  (req, res, next) => {
-  // const userId = req.body.userId;
-  const allowed = req.body.isAdmin;
-  const userId = decodeUid(req.headers.authorization);
+exports.deletePost = async (req, res, next) => {
+  const user = decodeUid(req.headers.authorization);
   const id = req.params.id;
-  const post =  models.Post.findOne({
-    where: { id: id }
-  })
-  .then((post) => {
-    
-    if (userId != post.userId) {
-      res.status(403).json({ message: "Not authorized" });
-      return;
-    }
-    
-  
-  
-    models.Post.destroy({ where: { id: id } })
-      .then((res) => {
-        res.status(200).json({ message: "Post deleted successfully" });
-      })
-      .catch((error) => {
-        res.status(500).json({ message: "Something went wrong" });
-      });
-  })
-  .catch((error) => {
-    res.status(500).json({ message: "Something went wrong" });
+
+  const userModel = await models.Users.findOne({
+    where: { id: user.id },
   });
 
-};
+  const post = await models.Post.findOne({
+    where: { id: id },
+  });
 
+  if (
+    user.id == post.getDataValue("userId") ||
+    userModel.getDataValue("isAdmin")
+  ) {
+    models.Post.findOne({ where: { id: id } })
+      .then((post) => {
+        post
+          .destroy()
+          .then(() => {
+            res.status(200).json({ message: "Post supprimé !" });
+          })
+          .catch((error) => {
+            res
+              .status(400)
+              .json({
+                error: error,
+                message: "Le post n'a pas pu être supprimé !",
+              });
+          });
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
+  } else {
+    res.status(403).json({ message: "Not authorized" });
+    return;
+  }
+};
 
 // Méthode pour récuperer un post
 exports.getOnePost = (req, res, next) => {

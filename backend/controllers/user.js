@@ -115,26 +115,45 @@ exports.logout = (req, res, next) => {
 
 // Méthode pour la suppression du compte
 
-exports.deleteUser = (req, res, next) => {
-  const userId = req.body.userId;
-  const allowed = req.body.isAdmin;
-  const token = decodeUid(req.headers.authorization);
-  const id = req.params.id;
-  const user = req.params.userId;
+exports.deleteUser = async (req, res, next) => {
+  const user = decodeUid(req.headers.authorization);
+  const id = req.params.userId;
 
-  if (!allowed || userId != user.userId) {
-    res.status(401).json({ message: "Not authorized" });
+  const userModel = await models.Users.findOne({
+    where: { id: user.id },
+  });
+
+  const users = await models.Users.findOne({
+    where: { id: id },
+  });
+
+  if (
+    user.id == users.getDataValue("userId") ||
+    userModel.getDataValue("isAdmin")
+  ) {
+    models.Users.findOne({ where: { id: id } })
+      .then((user) => {
+        user
+          .destroy()
+          .then(() => {
+            res.status(200).json({ message: "Post supprimé !" });
+          })
+          .catch((error) => {
+            res
+              .status(400)
+              .json({
+                error: error,
+                message: "Le post n'a pas pu être supprimé !",
+              });
+          });
+      })
+      .catch((error) => {
+        res.status(500).json({ message: "Something went wrong" });
+      });
+  } else {
+    res.status(403).json({ message: "Not authorized" });
     return;
   }
-
-
-  models.Users.destroy({ where: { id: id } })
-    .then((res) => {
-      res.status(200).json({ message: "Comment deleted successfully" });
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Something went wrong" });
-    });
 };
 
 // Méthode pour récuperer un utilisateur
@@ -166,5 +185,3 @@ exports.getAllUsers = (req, res) => {
       res.status(400).json({ message: "Something went wrong" });
     });
 };
-
-
