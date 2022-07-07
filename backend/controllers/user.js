@@ -1,7 +1,13 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const models = require("../models");
-
+const decodeUid = (authorization) => {
+  const token = authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+  return {
+    id: decodedToken.userId,
+  };
+};
 // Méthode pour l'inscription de l'utilisateur
 
 exports.signup = (req, res, next) => {
@@ -110,28 +116,25 @@ exports.logout = (req, res, next) => {
 // Méthode pour la suppression du compte
 
 exports.deleteUser = (req, res, next) => {
-  const id = req.params.userId;
-  models.Users.findOne({
-    where: { id: id },
-  })
-    .then((user) => {
-      if (user) {
-        models.Users.destroy({
-          where: { id: id },
-        })
-          .then(() =>
-            res.status(200).json({ message: "Votre compte à été supprimé" })
-          )
-          .catch(() =>
-            res.status(500).json({ error: "Une erreur est survenue" })
-          );
-      } else {
-        return res.status(404).json({ message: "Utilisateur non trouvé" });
-      }
+  const userId = req.body.userId;
+  const allowed = req.body.isAdmin;
+  const token = decodeUid(req.headers.authorization);
+  const id = req.params.id;
+  const user = req.params.userId;
+
+  if (!allowed || userId != user.userId) {
+    res.status(401).json({ message: "Not authorized" });
+    return;
+  }
+
+
+  models.Users.destroy({ where: { id: id } })
+    .then((res) => {
+      res.status(200).json({ message: "Comment deleted successfully" });
     })
-    .catch((error) =>
-      res.status(500).json({ error: "Une erreur est survenue" })
-    );
+    .catch((error) => {
+      res.status(500).json({ message: "Something went wrong" });
+    });
 };
 
 // Méthode pour récuperer un utilisateur
@@ -163,3 +166,5 @@ exports.getAllUsers = (req, res) => {
       res.status(400).json({ message: "Something went wrong" });
     });
 };
+
+

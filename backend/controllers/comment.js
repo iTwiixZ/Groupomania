@@ -48,28 +48,24 @@ exports.createComment = (req, res, next) => {
 // Supprimer un commentaire
 
 exports.deleteComment = (req, res, next) => {
-  models.Comment.findOne({
-    where: { id: req.params.id },
-  })
-    .then((comment) => {
-      comment
-        .destroy()
-        .then(() => {
-          res.status(200).json({ message: "commentaire supprimé !" });
-        })
-        .catch((error) => {
-          res
-            .status(400)
-            .json({
-              error: error,
-              message: "Le commentaire n'a pas pu être supprimé !",
-            });
-        });
+  const userId = req.body.userId;
+  const allowed = req.body.isAdmin;
+  const token = decodeUid(req.headers.authorization);
+  const id = req.params.id;
+  const comment = req.body.comment;
+
+  if (!allowed || userId != comment.userId) {
+    res.status(401).json({ message: "Not authorized" });
+    return;
+  }
+
+
+  models.Comment.destroy({ where: { id: id } })
+    .then((res) => {
+      res.status(200).json({ message: "Comment deleted successfully" });
     })
     .catch((error) => {
-      res
-        .status(400)
-        .json({ error: error, message: "Une erreur est survenue" });
+      res.status(500).json({ message: "Something went wrong" });
     });
 };
 

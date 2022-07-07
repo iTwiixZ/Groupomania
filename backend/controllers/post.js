@@ -50,34 +50,37 @@ exports.createPost = (req, res, next) => {
 
 // Méthode pour supprimé un post
 
-exports.deletePost = (req, res, next) => {
-  const post = req.body.post;
+exports.deletePost =  (req, res, next) => {
+  // const userId = req.body.userId;
+  const allowed = req.body.isAdmin;
   const userId = decodeUid(req.headers.authorization);
-  const isAdmin = req.body.isAdmin;
-  if (userId === post.userId || isAdmin === true) {
-    models.Post.findOne({
-      where: { id: req.params.id },
-    })
-      .then((post) => {
-        post
-          .destroy()
-          .then(() => {
-            res.status(200).json({ message: "Post supprimé !" });
-          })
-          .catch((error) => {
-            res.status(400).json({
-              error: error,
-              message: "Le post n'a pas pu être supprimé !",
-            });
-          });
+  const id = req.params.id;
+  const post =  models.Post.findOne({
+    where: { id: id }
+  })
+  .then((post) => {
+    
+    if (userId != post.userId) {
+      res.status(403).json({ message: "Not authorized" });
+      return;
+    }
+    
+  
+  
+    models.Post.destroy({ where: { id: id } })
+      .then((res) => {
+        res.status(200).json({ message: "Post deleted successfully" });
       })
       .catch((error) => {
-        res
-          .status(400)
-          .json({ error: error, message: "Une erreur est survenue" });
+        res.status(500).json({ message: "Something went wrong" });
       });
-  }
+  })
+  .catch((error) => {
+    res.status(500).json({ message: "Something went wrong" });
+  });
+
 };
+
 
 // Méthode pour récuperer un post
 exports.getOnePost = (req, res, next) => {
